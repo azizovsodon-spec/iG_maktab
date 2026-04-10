@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>IG Group | Современная образовательная платформа</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Анимированные фоновые шары */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb1 { width: 400px; height: 400px; top: -100px; left: -100px; animation: float1 25s infinite; }
+        .orb2 { width: 600px; height: 600px; bottom: -200px; right: -150px; animation: float2 35s infinite; }
+        .orb3 { width: 250px; height: 250px; top: 40%; left: 20%; animation: float3 18s infinite; }
+        .orb4 { width: 180px; height: 180px; bottom: 20%; right: 10%; animation: float4 22s infinite; }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(180deg); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, -30px) rotate(180deg); }
+        }
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -40px) scale(1.1); }
+        }
+        @keyframes float4 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-40px, 30px); }
+        }
+
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Бургер-меню для мобильных */
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover { color: #667eea; }
+
+        /* Основной контейнер */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+
+        /* Hero секция */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .online-badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4caf50;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #e0d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: clamp(14px, 4vw, 18px);
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .number {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 800;
+            color: white;
+        }
+
+        .hero-stat .label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Форма входа */
+        .login-card {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 32px;
+            padding: clamp(25px, 5vw, 40px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .login-card h2 {
+            font-size: clamp(22px, 5vw, 28px);
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-card .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-size: 16px;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-login:active {
+            transform: scale(0.98);
+        }
+
+        .demo-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 16px;
+            font-size: 12px;
+        }
+
+        /* Секции */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(28px, 6vw, 42px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            font-size: clamp(14px, 4vw, 18px);
+            margin-bottom: 40px;
+        }
+
+        /* Сетки */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:active {
+            transform: scale(0.98);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .feature-icon i {
+            font-size: 26px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: clamp(18px, 4vw, 22px);
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* Статистика */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: clamp(30px, 5vw, 60px);
+            margin: 30px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            color: #ffd700;
+        }
+
+        .stat-item .label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 8px;
+        }
+
+        /* Отзывы */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 25px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .review-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .review-author h4 {
+            color: white;
+            font-size: 16px;
+        }
+
+        .review-author p {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: white;
+            font-size: clamp(14px, 4vw, 18px);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 18px;
+            max-height: 200px;
+        }
+
+        /* Контакты */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: clamp(30px, 5vw, 60px);
+            text-align: center;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: white;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .contact-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Подвал */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255,255,255,0.7);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 50px;
+            font-size: 13px;
+        }
+
+        /* ========== АДАПТИВНЫЕ СТИЛИ ========== */
+
+        /* Планшеты (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 70px 20px 30px;
+            }
+            .hero {
+                gap: 40px;
+            }
+        }
+
+        /* Планшеты вертикальные (600px - 768px) */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 0;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 40px 0;
+            }
+            
+            .stats-section {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Мобильные телефоны (320px - 600px) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 60px 15px 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .hero-content p {
+                font-size: 14px;
+            }
+            
+            .hero-stats {
+                gap: 20px;
+            }
+            
+            .hero-stat .number {
+                font-size: 24px;
+            }
+            
+            .hero-stat .label {
+                font-size: 10px;
+            }
+            
+            .login-card {
+                padding: 25px;
+            }
+            
+            .login-card h2 {
+                font-size: 22px;
+            }
+            
+            .features-grid {
+                gap: 15px;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                gap: 20px;
+            }
+            
+            .stat-item .number {
+                font-size: 28px;
+            }
+            
+            .reviews-grid {
+                gap: 15px;
+            }
+            
+            .review-card {
+                padding: 20px;
+            }
+            
+            .contact-buttons {
+                gap: 10px;
+            }
+            
+            .contact-btn {
+                padding: 10px 18px;
+                font-size: 12px;
+            }
+        }
+
+        /* Очень маленькие телефоны (до 380px) */
+        @media (max-width: 380px) {
+            .hero-content h1 {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
+    <div class="bg-orb orb4"></div>
+
+    <nav class="navbar">
+        <div class="logo">🎓 IG Group</div>
+        <div class="burger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a onclick="scrollToSection('home'); closeMenu()">Главная</a>
+            <a onclick="scrollToSection('features'); closeMenu()">Возможности</a>
+            <a onclick="scrollToSection('reviews'); closeMenu()">Отзывы</a>
+            <a onclick="scrollToSection('faq'); closeMenu()">FAQ</a>
+            <a onclick="scrollToSection('contact'); closeMenu()">Контакты</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero секция -->
+        <div class="hero" id="home">
+            <div class="hero-content fade-up">
+                <div class="online-badge">
+                    <i class="fas fa-circle" style="font-size: 10px; margin-right: 8px; color: #4caf50;"></i>
+                    Сейчас онлайн: <span id="online-count">0</span> пользователей
+                </div>
+                <h1>Современное образование<br>в цифровом формате</h1>
+                <p>IG Group — это инновационная платформа для управления учебным процессом. Ученики, учителя и администрация работают в единой экосистеме.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="number" id="hero-students">0</div>
+                        <div class="label">Учеников</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number" id="hero-teachers">0</div>
+                        <div class="label">Учителей</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number" id="hero-marks">0</div>
+                        <div class="label">Оценок</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-card fade-up">
+                <h2>Вход в систему</h2>
+                <p class="subtitle">Введите свои данные для доступа</p>
+                <div class="input-group">
+                    <label><i class="fas fa-user"></i> Логин / ID</label>
+                    <input type="text" id="login-input" placeholder="Введите логин">
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-lock"></i> Пароль</label>
+                    <input type="password" id="password-input" placeholder="Введите пароль">
+                </div>
+                <button class="btn-login" onclick="login()">
+                    <i class="fas fa-arrow-right-to-bracket"></i> Войти в кабинет
+                </button>
+                <div class="demo-info">
+                    <p><strong>📚 Демо-доступ:</strong></p>
+                    <p>👨‍🎓 <strong>Ученик:</strong> student / 123</p>
+                    <p>👨‍🏫 <strong>Учитель:</strong> teacher / 123</p>
+                    <p>👑 <strong>Администратор:</strong> master / 123</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- О проекте -->
+        <div class="section" id="about">
+            <h2 class="section-title">О платформе IG Group</h2>
+            <p class="section-subtitle">Мы создаём будущее образования уже сегодня</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Современные технологии</h3>
+                    <p>Используем Firebase для мгновенной синхронизации данных и высокой производительности.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Безопасность данных</h3>
+                    <p>Все данные защищены и хранятся в надёжном облачном хранилище.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Аналитика успеваемости</h3>
+                    <p>Подробная статистика и графики успеваемости для каждого ученика и класса.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Возможности -->
+        <div class="section" id="features">
+            <h2 class="section-title">Что вы можете делать?</h2>
+            <p class="section-subtitle">Все инструменты для эффективного обучения</p>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-star"></i></div><h3>📊 Электронный журнал</h3><p>Выставление оценок, просмотр успеваемости, автоматический расчёт среднего балла.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-book"></i></div><h3>📚 Домашние задания</h3><p>Учителя выдают ДЗ, ученики видят задания в реальном времени.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar"></i></div><h3>📅 Расписание уроков</h3><p>Удобное расписание для каждого класса с фильтрацией по дням.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-users"></i></div><h3>👥 Управление классом</h3><p>Кураторы видят успеваемость своего класса и проблемные зоны.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-newspaper"></i></div><h3>📢 Новости и объявления</h3><p>Администрация отправляет важные новости всем пользователям.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-database"></i></div><h3>💾 Резервное копирование</h3><p>Экспорт и импорт базы данных в формате JSON.</p></div>
+            </div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="number" id="stat-students">0</div><div class="label">Активных учеников</div></div>
+                <div class="stat-item"><div class="number" id="stat-teachers">0</div><div class="label">Квалифицированных учителей</div></div>
+                <div class="stat-item"><div class="number" id="stat-marks">0</div><div class="label">Выставлено оценок</div></div>
+                <div class="stat-item"><div class="number" id="stat-homeworks">0</div><div class="label">Домашних заданий</div></div>
+            </div>
+        </div>
+
+        <!-- Отзывы -->
+        <div class="section" id="reviews">
+            <h2 class="section-title">Что говорят о нас</h2>
+            <p class="section-subtitle">Реальные отзывы наших пользователей</p>
+            <div class="reviews-grid">
+                <div class="review-card"><p class="review-text">"Отличная платформа! Удобно выставлять оценки, дети видят всё в реальном времени. Расписание и ДЗ — супер!"</p><div class="review-author"><div style="width:50px;height:50px;border-radius:50%;background:#667eea;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">А</div><div><h4>Анна Иванова</h4><p>Учитель математики</p></div></div></div>
+                <div class="review-card"><p class="review-text">"Как ученику, мне нравится видеть свои оценки и домашку в одном месте. Удобно и понятно!"</p><div class="review-author"><div style="width:50px;height:50px;border-radius:50%;background:#764ba2;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">М</div><div><h4>Максим Петров</h4><p>Ученик 11 класса</p></div></div></div>
+                <div class="review-card"><p class="review-text">"Админ-панель позволяет полностью управлять системой. Бэкапы, предметы, расписание — всё под контролем!"</p><div class="review-author"><div style="width:50px;height:50px;border-radius:50%;background:#ff9800;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">Д</div><div><h4>Дмитрий Сидоров</h4><p>Администратор школы</p></div></div></div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section" id="faq">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <p class="section-subtitle">Ответы на популярные вопросы</p>
+            <div class="faq-grid">
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Как зарегистрироваться в системе?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Регистрация новых пользователей производится только администратором системы. Обратитесь к вашему классному руководителю или администрации школы.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Что делать, если забыл пароль?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Обратитесь к учителю или администратору — они смогут сбросить ваш пароль и выдать новый.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Как учителю выставить оценки?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Войдите в панель учителя, перейдите в раздел "Журнал оценок", выберите класс и предмет, затем введите оценку для каждого ученика.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Как ученику посмотреть домашнее задание?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">После входа в ученический аккаунт перейдите в раздел "Домашка" в боковом меню. Там будут все актуальные задания.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Можно ли изменить аватар?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да! В разделе "Настройки" вы можете загрузить свою фотографию, которая будет отображаться в профиле.</div></div>
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div class="contact-section" id="contact">
+            <h2 style="color: white; margin-bottom: 15px;">📞 Свяжитесь с нами</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">Есть вопросы? Мы всегда готовы помочь!</p>
+            <div class="contact-buttons">
+                <a href="mailto:support@iggroup.com" class="contact-btn"><i class="fas fa-envelope"></i> support@iggroup.com</a>
+                <a href="tel:+992123456789" class="contact-btn"><i class="fas fa-phone"></i> +992 (12) 345-67-89</a>
+                <a href="#" class="contact-btn"><i class="fab fa-telegram"></i> Telegram</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 IG Group. Все права защищены. Современная образовательная платформа.</p>
+            <p style="margin-top: 8px; font-size: 12px;">Разработано с ❤️ для цифрового образования</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, get, onValue, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyACWyilQoqUPQsSRzAydykDfs5MKfw0Pr0",
+            authDomain: "myschoolsystem0077.firebaseapp.com",
+            databaseURL: "https://myschoolsystem0077-default-rtdb.firebaseio.com",
+            projectId: "myschoolsystem0077",
+            storageBucket: "myschoolsystem0077.firebasestorage.app",
+            messagingSenderId: "424982334748",
+            appId: "1:424982334748:web:8e7c21d834328994df3ed9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Онлайн-счётчик
+        onValue(ref(db, 'stats/online'), (snap) => {
+            document.getElementById('online-count').innerText = snap.val() || 0;
+        });
+
+        // Загрузка статистики
+        const loadStats = async () => {
+            const usersSnap = await get(ref(db, 'users'));
+            const users = usersSnap.val() || {};
+            let students = 0, teachers = 0, totalMarks = 0;
+            for (let id in users) {
+                if (users[id].role === 'student') students++;
+                else if (users[id].role === 'teacher') teachers++;
+                if (users[id].marks_detailed) totalMarks += Object.keys(users[id].marks_detailed).length;
+            }
+            document.getElementById('hero-students').innerText = students;
+            document.getElementById('hero-teachers').innerText = teachers;
+            document.getElementById('hero-marks').innerText = totalMarks;
+            document.getElementById('stat-students').innerText = students;
+            document.getElementById('stat-teachers').innerText = teachers;
+            document.getElementById('stat-marks').innerText = totalMarks;
+            
+            const hwSnap = await get(ref(db, 'homeworks'));
+            const hw = hwSnap.val() || {};
+            let totalHw = 0;
+            for (let cls in hw) totalHw += Object.keys(hw[cls]).length;
+            document.getElementById('stat-homeworks').innerText = totalHw;
+        };
+        loadStats();
+
+        // Функция входа
+        window.login = async () => {
+            const login = document.getElementById('login-input').value.trim();
+            const password = document.getElementById('password-input').value.trim();
+            if (!login || !password) { alert("Введите логин и пароль!"); return; }
+            
+            let userRef = ref(db, 'users/' + login);
+            let snapshot = await get(userRef);
+            if (!snapshot.exists()) { userRef = ref(db, 'admins/' + login); snapshot = await get(userRef); }
+            
+            if (snapshot.exists()) {
+                const user = snapshot.val();
+                if (user.pass === password) {
+                    localStorage.setItem('currentUser', JSON.stringify({ id: login, name: user.name, role: user.role, login: login, group: user.group || '' }));
+                    const onlineRef = ref(db, 'stats/online');
+                    const currentOnline = (await get(onlineRef)).val() || 0;
+                    await set(onlineRef, currentOnline + 1);
+                    if (user.role === 'master') window.location.href = 'master.html';
+                    else if (user.role === 'teacher') window.location.href = 'admin.html';
+                    else window.location.href = 'index.html';
+                } else { alert("Неверный пароль!"); }
+            } else { alert("Пользователь не найден!"); }
+        };
+        
+        // Мобильное меню
+        window.toggleMenu = () => {
+            document.getElementById('navLinks').classList.toggle('show');
+        };
+        window.closeMenu = () => {
+            document.getElementById('navLinks').classList.remove('show');
+        };
+        
+        window.scrollToSection = (id) => {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        };
+        window.toggleFaq = (element) => { element.classList.toggle('active'); };
+        
+        document.getElementById('password-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
+    </script>
+</body>
+</html>

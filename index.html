@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>IG Group | Личный кабинет ученика</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        /* Шапка */
+        .top-bar {
+            background: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #667eea;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: #ff3b30;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Боковое меню (10+ пунктов) */
+        .sidebar-menu {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .menu-item i {
+            width: 24px;
+            font-size: 16px;
+        }
+
+        .menu-item:hover {
+            background: #f0f2f5;
+            color: #667eea;
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Контент */
+        .content-area {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Карточки статистики */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* ТАБЛИЦА ОЦЕНОК (как на скриншоте - Химия, Натрий, Фосфор) */
+        .marks-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        .marks-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .marks-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .marks-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        /* Стили для оценок (цветные бейджи) */
+        .mark-badge {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            line-height: 42px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+        }
+
+        .mark-5 { background: #4caf50; box-shadow: 0 2px 8px rgba(76,175,80,0.3); }
+        .mark-4 { background: #2196f3; box-shadow: 0 2px 8px rgba(33,150,243,0.3); }
+        .mark-3 { background: #ff9800; box-shadow: 0 2px 8px rgba(255,152,0,0.3); }
+        .mark-2 { background: #f44336; box-shadow: 0 2px 8px rgba(244,67,54,0.3); }
+        .mark-1 { background: #9e9e9e; box-shadow: 0 2px 8px rgba(158,158,158,0.3); }
+
+        /* Карточка предмета (для таблицы класса) */
+        .subject-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .subject-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subject-marks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* Домашка */
+        .homework-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        /* Расписание */
+        .schedule-day {
+            margin-top: 20px;
+        }
+
+        .schedule-day h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .schedule-lesson {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Новости */
+        .news-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        /* Настройки */
+        .settings-group {
+            margin-bottom: 20px;
+        }
+
+        .settings-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .settings-group input, 
+        .settings-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Библиотека */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .library-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .library-card:active {
+            transform: scale(0.98);
+        }
+
+        .library-card i {
+            font-size: 40px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* График успеваемости (простой) */
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .sidebar-menu {
+                width: 100%;
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 8px;
+                padding: 15px;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .marks-table th,
+            .marks-table td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .mark-badge {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 14px;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            z-index: 1000;
+            font-size: 13px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">🎓 IG Group | Ученик</div>
+        <div class="user-info">
+            <span class="user-name" id="user-name">Загрузка...</span>
+            <img class="user-avatar" id="user-avatar" src="">
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Выход</button>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="sidebar-menu">
+            <div class="menu-item active" onclick="showPage('home')"><i class="fas fa-home"></i> <span>Главная</span></div>
+            <div class="menu-item" onclick="showPage('my-marks')"><i class="fas fa-star"></i> <span>Мои оценки</span></div>
+            <div class="menu-item" onclick="showPage('class-marks')"><i class="fas fa-users"></i> <span>Оценки класса</span></div>
+            <div class="menu-item" onclick="showPage('homework')"><i class="fas fa-book-open"></i> <span>Домашка</span></div>
+            <div class="menu-item" onclick="showPage('schedule')"><i class="fas fa-calendar"></i> <span>Расписание</span></div>
+            <div class="menu-item" onclick="showPage('news')"><i class="fas fa-newspaper"></i> <span>Новости</span></div>
+            <div class="menu-item" onclick="showPage('library')"><i class="fas fa-book"></i> <span>Библиотека</span></div>
+            <div class="menu-item" onclick="showPage('progress')"><i class="fas fa-chart-line"></i> <span>Успеваемость</span></div>
+            <div class="menu-item" onclick="showPage('profile')"><i class="fas fa-user-circle"></i> <span>Профиль</span></div>
+            <div class="menu-item" onclick="showPage('settings')"><i class="fas fa-cog"></i> <span>Настройки</span></div>
+        </div>
+        
+        <div class="content-area">
+            <!-- Главная -->
+            <div id="home-page" class="page active">
+                <h2>Привет, <span id="greeting"></span>! 👋</h2>
+                <p style="color: #666; margin: 10px 0 25px;">Добро пожаловать в твой личный кабинет</p>
+                <div class="stats-grid">
+                    <div class="stat-card"><h3 id="avg-mark">0.0</h3><p>Средний балл</p></div>
+                    <div class="stat-card"><h3 id="total-marks-count">0</h3><p>Всего оценок</p></div>
+                    <div class="stat-card"><h3 id="best-subject">—</h3><p>Лучший предмет</p></div>
+                    <div class="stat-card"><h3 id="homework-count">0</h3><p>ДЗ на неделю</p></div>
+                </div>
+                <div style="margin-top: 25px;">
+                    <h3>📢 Последние новости</h3>
+                    <div id="latest-news"></div>
+                </div>
+            </div>
+            
+            <!-- Мои оценки (ТАБЛИЦА как на скриншоте) -->
+            <div id="my-marks-page" class="page">
+                <h2>📊 Мои оценки</h2>
+                <div class="marks-table-container">
+                    <table class="marks-table">
+                        <thead>
+                            <tr><th>Предмет</th><th>Оценка</th><th>Дата</th><th>Учитель</th></tr>
+                        </thead>
+                        <tbody id="marks-list"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Оценки класса (Таблица + предметы как Химия, Натрий, Фосфор) -->
+            <div id="class-marks-page" class="page">
+                <h2>🏆 Успеваемость класса</h2>
+                <select id="class-subject" class="settings-group" style="width:100%; padding:12px; margin-bottom:20px;" onchange="loadClassMarks()">
+                    <option value="">-- Выберите предмет --</option>
+                    <option value="Химия">🧪 Химия</option>
+                    <option value="Натрий">⚡ Натрий</option>
+                    <option value="Фосфор">🔥 Фосфор</option>
+                    <option value="Математика">📐 Математика</option>
+                    <option value="Физика">⚛️ Физика</option>
+                    <option value="Биология">🧬 Биология</option>
+                </select>
+                <div class="marks-table-container">
+                    <table class="marks-table">
+                        <thead><tr><th>Ученик</th><th>Последняя оценка</th><th>Средний балл</th><th>Всего оценок</th></tr></thead>
+                        <tbody id="class-marks-list"></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Домашка -->
+            <div id="homework-page" class="page">
+                <h2>📚 Домашние задания</h2>
+                <div id="homework-list"></div>
+            </div>
+            
+            <!-- Расписание -->
+            <div id="schedule-page" class="page">
+                <h2>📅 Расписание уроков</h2>
+                <div id="schedule-list"></div>
+            </div>
+            
+            <!-- Новости -->
+            <div id="news-page" class="page">
+                <h2>📰 Новости школы</h2>
+                <div id="news-list"></div>
+            </div>
+            
+            <!-- Библиотека -->
+            <div id="library-page" class="page">
+                <h2>📖 Цифровая библиотека</h2>
+                <div class="library-grid">
+                    <div class="library-card" onclick="showToast('Математика - скоро будет доступна')"><i class="fas fa-calculator"></i><h4>Математика</h4><p>Учебники и задачи</p></div>
+                    <div class="library-card" onclick="showToast('Химия - скоро будет доступна')"><i class="fas fa-flask"></i><h4>Химия</h4><p>Таблица Менделеева</p></div>
+                    <div class="library-card" onclick="showToast('Физика - скоро будет доступна')"><i class="fas fa-atom"></i><h4>Физика</h4><p>Законы и формулы</p></div>
+                    <div class="library-card" onclick="showToast('Биология - скоро будет доступна')"><i class="fas fa-dna"></i><h4>Биология</h4><p>Анатомия и ботаника</p></div>
+                    <div class="library-card" onclick="showToast('История - скоро будет доступна')"><i class="fas fa-landmark"></i><h4>История</h4><p>Всемирная история</p></div>
+                    <div class="library-card" onclick="showToast('Английский - скоро будет доступна')"><i class="fas fa-language"></i><h4>Английский</h4><p>Словари и грамматика</p></div>
+                </div>
+            </div>
+            
+            <!-- Успеваемость (график) -->
+            <div id="progress-page" class="page">
+                <h2>📈 Успеваемость по предметам</h2>
+                <div id="progress-bars"></div>
+            </div>
+            
+            <!-- Профиль -->
+            <div id="profile-page" class="page">
+                <h2>👤 Мой профиль</h2>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img id="profile-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #667eea;">
+                </div>
+                <div class="settings-group"><label>ФИО</label><input type="text" id="profile-name" readonly style="background:#f5f5f5;"></div>
+                <div class="settings-group"><label>Класс</label><input type="text" id="profile-class" readonly style="background:#f5f5f5;"></div>
+                <div class="settings-group"><label>Логин</label><input type="text" id="profile-login" readonly style="background:#f5f5f5;"></div>
+                <div class="settings-group"><label>Средний балл</label><input type="text" id="profile-avg" readonly style="background:#f5f5f5;"></div>
+            </div>
+            
+            <!-- Настройки -->
+            <div id="settings-page" class="page">
+                <h2>⚙️ Настройки</h2>
+                <div class="settings-group"><label>Имя (отображаемое)</label><input type="text" id="settings-name" placeholder="Ваше имя"></div>
+                <div class="settings-group"><label>Новый пароль</label><input type="password" id="settings-password" placeholder="Оставьте пустым, если не менять"></div>
+                <div class="settings-group"><label>Тема оформления</label><select id="settings-theme"><option value="light">Светлая</option><option value="dark">Тёмная</option></select></div>
+                <button class="btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyACWyilQoqUPQsSRzAydykDfs5MKfw0Pr0",
+            authDomain: "myschoolsystem0077.firebaseapp.com",
+            databaseURL: "https://myschoolsystem0077-default-rtdb.firebaseio.com",
+            projectId: "myschoolsystem0077",
+            storageBucket: "myschoolsystem0077.firebasestorage.app",
+            messagingSenderId: "424982334748",
+            appId: "1:424982334748:web:8e7c21d834328994df3ed9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) window.location.href = 'anim.html';
+
+        let studentData = null;
+        let studentGroup = '';
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        // Загрузка данных ученика
+        const loadStudentData = async () => {
+            const snap = await get(ref(db, `users/${currentUser.id}`));
+            studentData = snap.val();
+            if (studentData) {
+                document.getElementById('user-name').innerText = studentData.name;
+                document.getElementById('greeting').innerText = studentData.name.split(' ')[0];
+                studentGroup = studentData.group || '11-А';
+                const avatar = studentData.photo || `https://ui-avatars.com/api/?name=${studentData.name}&background=667eea&color=fff`;
+                document.getElementById('user-avatar').src = avatar;
+                document.getElementById('profile-avatar').src = avatar;
+                document.getElementById('profile-name').value = studentData.name;
+                document.getElementById('profile-class').value = studentGroup;
+                document.getElementById('profile-login').value = currentUser.id;
+                document.getElementById('settings-name').value = studentData.name;
+            }
+            loadMarks();
+            loadStats();
+            loadHomework();
+            loadSchedule();
+            loadNews();
+            loadClassMarks();
+            loadProgressBars();
+        };
+
+        // Мои оценки (таблица)
+        const loadMarks = async () => {
+            const snap = await get(ref(db, `users/${currentUser.id}/marks_detailed`));
+            const marks = snap.val();
+            const tbody = document.getElementById('marks-list');
+            tbody.innerHTML = '';
+            if (!marks) { tbody.innerHTML = '<tr><td colspan="4">Нет оценок</td></tr>'; return; }
+            
+            let sum = 0, count = 0;
+            const subjectMarks = {};
+            
+            Object.values(marks).forEach(m => {
+                sum += parseInt(m.value);
+                count++;
+                if (!subjectMarks[m.subject]) subjectMarks[m.subject] = { sum: 0, count: 0 };
+                subjectMarks[m.subject].sum += parseInt(m.value);
+                subjectMarks[m.subject].count++;
+                tbody.innerHTML += `<tr>
+                    <td><b>${m.subject}</b></td>
+                    <td><span class="mark-badge mark-${m.value}">${m.value}</span></td>
+                    <td>${m.date}</td>
+                    <td>${m.teacher || '—'}</td>
+                </tr>`;
+            });
+            
+            const avg = count > 0 ? (sum / count).toFixed(1) : '0.0';
+            document.getElementById('avg-mark').innerText = avg;
+            document.getElementById('total-marks-count').innerText = count;
+            document.getElementById('profile-avg').value = avg;
+            
+            // Лучший предмет
+            let bestSubj = '—', bestAvg = 0;
+            for (let subj in subjectMarks) {
+                const subjAvg = subjectMarks[subj].sum / subjectMarks[subj].count;
+                if (subjAvg > bestAvg) { bestAvg = subjAvg; bestSubj = subj; }
+            }
+            document.getElementById('best-subject').innerText = bestSubj;
+        };
+
+        // Статистика
+        const loadStats = async () => {
+            if (!studentGroup) return;
+            const snap = await get(ref(db, `homeworks/${studentGroup}`));
+            const hw = snap.val();
+            const count = hw ? Object.keys(hw).length : 0;
+            document.getElementById('homework-count').innerText = count;
+        };
+
+        // Оценки класса (таблица)
+        window.loadClassMarks = async () => {
+            const subject = document.getElementById('class-subject').value;
+            if (!subject || !studentGroup) return;
+            
+            const usersSnap = await get(ref(db, 'users'));
+            const users = usersSnap.val();
+            const tbody = document.getElementById('class-marks-list');
+            tbody.innerHTML = '';
+            
+            for (let id in users) {
+                const u = users[id];
+                if (u.role === 'student' && u.group === studentGroup) {
+                    let lastMark = '—', sum = 0, count = 0;
+                    if (u.marks_detailed) {
+                        const marks = Object.values(u.marks_detailed);
+                        const subjMarks = marks.filter(m => m.subject === subject);
+                        if (subjMarks.length > 0) {
+                            lastMark = subjMarks[subjMarks.length - 1].value;
+                            subjMarks.forEach(m => { sum += parseInt(m.value); count++; });
+                        }
+                    }
+                    const avg = count > 0 ? (sum / count).toFixed(1) : '—';
+                    tbody.innerHTML += `<tr>
+                        <td><b>${u.name}</b></td>
+                        <td><span class="mark-badge mark-${lastMark}">${lastMark}</span></td>
+                        <td>${avg}</td>
+                        <td>${count}</td>
+                    </tr>`;
+                }
+            }
+            if (tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="4">Нет учеников в классе</td></tr>';
+        };
+
+        // Домашка
+        const loadHomework = async () => {
+            if (!studentGroup) return;
+            const snap = await get(ref(db, `homeworks/${studentGroup}`));
+            const hw = snap.val();
+            const container = document.getElementById('homework-list');
+            container.innerHTML = '';
+            if (!hw) { container.innerHTML = '<p>Нет домашних заданий</p>'; return; }
+            Object.values(hw).reverse().forEach(h => {
+                container.innerHTML += `<div class="homework-item">
+                    <strong>📖 ${h.subject}</strong> | 👨‍🏫 ${h.teacher} | 📅 ${h.date}
+                    <p style="margin-top: 8px;">${h.text}</p>
+                </div>`;
+            });
+        };
+
+        // Расписание
+        const loadSchedule = async () => {
+            const snap = await get(ref(db, 'schedule'));
+            const schedule = snap.val();
+            const container = document.getElementById('schedule-list');
+            container.innerHTML = '';
+            if (!schedule) { container.innerHTML = '<p>Расписание не загружено</p>'; return; }
+            
+            const mySchedule = Object.values(schedule).filter(s => s.group === studentGroup);
+            if (mySchedule.length === 0) { container.innerHTML = '<p>Расписание не найдено</p>'; return; }
+            
+            const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+            days.forEach(day => {
+                const dayLessons = mySchedule.filter(s => s.day === day);
+                if (dayLessons.length > 0) {
+                    let html = `<div class="schedule-day"><h4>📌 ${day}</h4>`;
+                    dayLessons.forEach(l => { html += `<div class="schedule-lesson"><span><b>${l.lesson}</b></span><span>${l.teacher}</span></div>`; });
+                    html += `</div>`;
+                    container.innerHTML += html;
+                }
+            });
+        };
+
+        // Новости
+        const loadNews = async () => {
+            const snap = await get(ref(db, 'global_updates'));
+            const news = snap.val();
+            const container = document.getElementById('news-list');
+            const latestContainer = document.getElementById('latest-news');
+            container.innerHTML = '';
+            if (!news) { container.innerHTML = '<p>Нет новостей</p>'; return; }
+            
+            const newsArray = Object.values(news).reverse();
+            if (latestContainer && newsArray[0]) {
+                latestContainer.innerHTML = `<div style="border-left: 3px solid #667eea; padding-left: 15px;">
+                    <strong>${newsArray[0].title}</strong><br><small>${newsArray[0].date}</small>
+                    <p>${newsArray[0].text}</p>
+                </div>`;
+            }
+            newsArray.forEach(n => {
+                container.innerHTML += `<div class="news-item">
+                    <strong>📢 ${n.title}</strong><br><small>${n.date}</small>
+                    <p style="margin-top: 8px;">${n.text}</p>
+                </div>`;
+            });
+        };
+
+        // График успеваемости
+        const loadProgressBars = async () => {
+            const snap = await get(ref(db, `users/${currentUser.id}/marks_detailed`));
+            const marks = snap.val();
+            const container = document.getElementById('progress-bars');
+            container.innerHTML = '';
+            if (!marks) { container.innerHTML = '<p>Нет данных</p>'; return; }
+            
+            const subjects = {};
+            Object.values(marks).forEach(m => {
+                if (!subjects[m.subject]) subjects[m.subject] = [];
+                subjects[m.subject].push(parseInt(m.value));
+            });
+            
+            for (let subj in subjects) {
+                const avg = subjects[subj].reduce((a,b) => a + b, 0) / subjects[subj].length;
+                const percent = (avg / 5) * 100;
+                container.innerHTML += `
+                    <div><b>${subj}</b></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${percent}%;">${avg.toFixed(1)}</div>
+                    </div>
+                `;
+            }
+        };
+
+        // Настройки
+        window.saveSettings = async () => {
+            const name = document.getElementById('settings-name').value;
+            const password = document.getElementById('settings-password').value;
+            const theme = document.getElementById('settings-theme').value;
+            
+            const updates = { name: name };
+            if (password) updates.pass = password;
+            await update(ref(db, `users/${currentUser.id}`), updates);
+            showToast('Настройки сохранены!');
+            if (password) {
+                currentUser.pass = password;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            loadStudentData();
+        };
+
+        window.showPage = (page) => {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+            document.getElementById(`${page}-page`).classList.add('active');
+            event.target.closest('.menu-item').classList.add('active');
+        };
+
+        window.logout = () => {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'anim.html';
+        };
+
+        loadStudentData();
+    </script>
+</body>
+</html>

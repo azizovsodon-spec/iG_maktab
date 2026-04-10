@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>IG Group | Панель учителя</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        /* Шапка */
+        .top-bar {
+            background: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #667eea;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: #ff3b30;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Боковое меню (11 пунктов) */
+        .sidebar-menu {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .menu-item i {
+            width: 24px;
+            font-size: 16px;
+        }
+
+        .menu-item:hover {
+            background: #f0f2f5;
+            color: #667eea;
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Контент */
+        .content-area {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Карточки статистики */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Таблица оценок */
+        .marks-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        .marks-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .marks-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .marks-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        /* Стили для оценок */
+        .mark-badge {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            line-height: 42px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+        }
+
+        .mark-5 { background: #4caf50; box-shadow: 0 2px 8px rgba(76,175,80,0.3); }
+        .mark-4 { background: #2196f3; box-shadow: 0 2px 8px rgba(33,150,243,0.3); }
+        .mark-3 { background: #ff9800; box-shadow: 0 2px 8px rgba(255,152,0,0.3); }
+        .mark-2 { background: #f44336; box-shadow: 0 2px 8px rgba(244,67,54,0.3); }
+
+        .mark-input {
+            width: 70px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-success {
+            background: #4caf50;
+        }
+
+        select, .select-input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .homework-item, .student-item, .announcement-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .rank-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .sidebar-menu {
+                width: 100%;
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 8px;
+                padding: 15px;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .content-area {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .marks-table th,
+            .marks-table td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .mark-badge {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 14px;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            z-index: 1000;
+            font-size: 13px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">🎓 IG Group | Учитель</div>
+        <div class="user-info">
+            <span class="user-name" id="user-name">Загрузка...</span>
+            <img class="user-avatar" id="user-avatar" src="">
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Выход</button>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="sidebar-menu">
+            <div class="menu-item active" onclick="showPage('dashboard')"><i class="fas fa-chalkboard-user"></i> <span>Панель</span></div>
+            <div class="menu-item" onclick="showPage('journal')"><i class="fas fa-table-list"></i> <span>Журнал оценок</span></div>
+            <div class="menu-item" onclick="showPage('homework')"><i class="fas fa-paper-plane"></i> <span>Домашка</span></div>
+            <div class="menu-item" onclick="showPage('schedule')"><i class="fas fa-calendar"></i> <span>Расписание</span></div>
+            <div class="menu-item" onclick="showPage('myclass')"><i class="fas fa-users"></i> <span>Мой класс</span></div>
+            <div class="menu-item" onclick="showPage('progress')"><i class="fas fa-chart-line"></i> <span>Успеваемость</span></div>
+            <div class="menu-item" onclick="showPage('rating')"><i class="fas fa-trophy"></i> <span>Рейтинг</span></div>
+            <div class="menu-item" onclick="showPage('announcements')"><i class="fas fa-bullhorn"></i> <span>Объявления</span></div>
+            <div class="menu-item" onclick="showPage('reports')"><i class="fas fa-file-alt"></i> <span>Отчёты</span></div>
+            <div class="menu-item" onclick="showPage('settings')"><i class="fas fa-cog"></i> <span>Настройки</span></div>
+        </div>
+        
+        <div class="content-area">
+            <!-- Панель управления -->
+            <div id="dashboard-page" class="page active">
+                <h2>👨‍🏫 Добро пожаловать, <span id="teacher-name"></span>!</h2>
+                <p style="color: #666; margin: 10px 0 25px;">Управляй своим классом и успеваемостью учеников</p>
+                <div class="stats-grid">
+                    <div class="stat-card"><h3 id="students-count">0</h3><p>Учеников в классе</p></div>
+                    <div class="stat-card"><h3 id="class-avg">0.0</h3><p>Средний балл класса</p></div>
+                    <div class="stat-card"><h3 id="today-lessons">0</h3><p>Уроков сегодня</p></div>
+                    <div class="stat-card"><h3 id="homework-today">0</h3><p>ДЗ на сегодня</p></div>
+                </div>
+                <div style="margin-top: 25px;">
+                    <h3>📢 Последние объявления</h3>
+                    <div id="latest-announcements"></div>
+                </div>
+            </div>
+            
+            <!-- Журнал оценок (таблица с выставлением) -->
+            <div id="journal-page" class="page">
+                <h2>📖 Журнал оценок</h2>
+                <div class="grid-2">
+                    <div><label>Выберите класс</label><select id="journal-class" onchange="loadClassStudents()"><option value="">-- Загрузка --</option></select></div>
+                    <div><label>Выберите предмет</label><select id="journal-subject"><option value="">-- Выберите предмет --</option></select></div>
+                </div>
+                <div class="marks-table-container">
+                    <table class="marks-table">
+                        <thead><tr><th>Ученик</th><th>Текущая оценка</th><th>Новая оценка</th><th>Действие</th></tr></thead>
+                        <tbody id="marks-table-body"><tr><td colspan="4" style="text-align:center">Выберите класс и предмет</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Домашние задания -->
+            <div id="homework-page" class="page">
+                <h2>📝 Выдать домашнее задание</h2>
+                <div class="grid-2">
+                    <div><label>Класс</label><select id="hw-class"><option value="">-- Выберите класс --</option></select></div>
+                    <div><label>Предмет</label><select id="hw-subject"><option value="">-- Выберите предмет --</option></select></div>
+                </div>
+                <label>Текст задания</label>
+                <textarea id="hw-text" placeholder="Опишите домашнее задание..."></textarea>
+                <button class="btn-primary" onclick="sendHomework()"><i class="fas fa-paper-plane"></i> Отправить ДЗ</button>
+                
+                <h3 style="margin: 30px 0 15px;">📋 История заданий</h3>
+                <div id="hw-history"></div>
+            </div>
+            
+            <!-- Расписание -->
+            <div id="schedule-page" class="page">
+                <h2>📅 Расписание уроков</h2>
+                <div id="schedule-list"></div>
+            </div>
+            
+            <!-- Мой класс -->
+            <div id="myclass-page" class="page">
+                <h2>👨‍🎓 Список учеников</h2>
+                <div id="students-list"></div>
+            </div>
+            
+            <!-- Успеваемость класса -->
+            <div id="progress-page" class="page">
+                <h2>📈 Успеваемость класса</h2>
+                <div id="class-progress"></div>
+            </div>
+            
+            <!-- Рейтинг учеников -->
+            <div id="rating-page" class="page">
+                <h2>🏆 Рейтинг учеников</h2>
+                <div id="rating-list"></div>
+            </div>
+            
+            <!-- Объявления -->
+            <div id="announcements-page" class="page">
+                <h2>📢 Отправить объявление классу</h2>
+                <label>Заголовок</label>
+                <input type="text" id="ann-title" placeholder="Заголовок объявления">
+                <label>Текст</label>
+                <textarea id="ann-text" rows="4" placeholder="Текст объявления..."></textarea>
+                <button class="btn-primary" onclick="sendAnnouncement()"><i class="fas fa-paper-plane"></i> Отправить классу</button>
+                <h3 style="margin: 30px 0 15px;">📜 История объявлений</h3>
+                <div id="announcements-list"></div>
+            </div>
+            
+            <!-- Отчёты -->
+            <div id="reports-page" class="page">
+                <h2>📊 Экспорт отчётов</h2>
+                <div class="grid-2">
+                    <div><label>Выберите класс</label><select id="report-class"><option value="">-- Выберите класс --</option></select></div>
+                    <div><label>Тип отчёта</label><select id="report-type"><option value="marks">Успеваемость</option><option value="homework">Домашние задания</option></select></div>
+                </div>
+                <button class="btn-primary" onclick="exportReport()"><i class="fas fa-download"></i> Экспортировать</button>
+            </div>
+            
+            <!-- Настройки -->
+            <div id="settings-page" class="page">
+                <h2>⚙️ Настройки профиля</h2>
+                <div class="grid-2">
+                    <div><label>ФИО</label><input type="text" id="teacher-name-input" placeholder="Ваше имя"></div>
+                    <div><label>Мой класс</label><input type="text" id="teacher-class-input" placeholder="Например: 11-А"></div>
+                    <div><label>Логин</label><input type="text" id="teacher-login" readonly style="background:#f5f5f5;"></div>
+                    <div><label>Новый пароль</label><input type="password" id="teacher-password" placeholder="Оставьте пустым"></div>
+                </div>
+                <button class="btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, get, set, update, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyACWyilQoqUPQsSRzAydykDfs5MKfw0Pr0",
+            authDomain: "myschoolsystem0077.firebaseapp.com",
+            databaseURL: "https://myschoolsystem0077-default-rtdb.firebaseio.com",
+            projectId: "myschoolsystem0077",
+            storageBucket: "myschoolsystem0077.firebasestorage.app",
+            messagingSenderId: "424982334748",
+            appId: "1:424982334748:web:8e7c21d834328994df3ed9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) window.location.href = 'anim.html';
+
+        let teacherData = null;
+        let teacherClass = '';
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        // Загрузка данных учителя
+        const loadTeacherData = async () => {
+            const snap = await get(ref(db, `users/${currentUser.id}`));
+            teacherData = snap.val();
+            if (teacherData) {
+                document.getElementById('user-name').innerText = teacherData.name;
+                document.getElementById('teacher-name').innerText = teacherData.name.split(' ')[0];
+                teacherClass = teacherData.group || '';
+                document.getElementById('teacher-class-input').value = teacherClass;
+                document.getElementById('teacher-name-input').value = teacherData.name;
+                document.getElementById('teacher-login').value = currentUser.id;
+                const avatar = teacherData.photo || `https://ui-avatars.com/api/?name=${teacherData.name}&background=667eea&color=fff`;
+                document.getElementById('user-avatar').src = avatar;
+            }
+            loadClasses();
+            loadSubjects();
+            loadSchedule();
+            loadClassStats();
+            loadAnnouncements();
+        };
+
+        // Загрузка классов
+        const loadClasses = async () => {
+            const usersSnap = await get(ref(db, 'users'));
+            const users = usersSnap.val() || {};
+            const classes = new Set();
+            for (let id in users) {
+                if (users[id].role === 'student' && users[id].group) classes.add(users[id].group);
+            }
+            const selects = ['journal-class', 'hw-class', 'report-class'];
+            selects.forEach(selId => {
+                const sel = document.getElementById(selId);
+                if (sel) {
+                    sel.innerHTML = '<option value="">-- Выберите класс --</option>';
+                    classes.forEach(c => sel.innerHTML += `<option value="${c}">${c}</option>`);
+                }
+            });
+        };
+
+        // Загрузка предметов
+        const loadSubjects = async () => {
+            const snap = await get(ref(db, 'system/lessons'));
+            let subjects = snap.val() || [];
+            if (subjects.length === 0) subjects = ['Химия', 'Натрий', 'Фосфор', 'Математика', 'Физика', 'Биология'];
+            const selects = ['journal-subject', 'hw-subject'];
+            selects.forEach(selId => {
+                const sel = document.getElementById(selId);
+                if (sel) {
+                    sel.innerHTML = '<option value="">-- Выберите предмет --</option>';
+                    subjects.forEach(s => sel.innerHTML += `<option value="${s}">${s}</option>`);
+                }
+            });
+        };
+
+        // Загрузка учеников для журнала
+        window.loadClassStudents = async () => {
+            const className = document.getElementById('journal-class').value;
+            const subject = document.getElementById('journal-subject').value;
+            if (!className || !subject) return;
+            
+            const usersSnap = await get(ref(db, 'users'));
+            const users = usersSnap.val();
+            const tbody = document.getElementById('marks-table-body');
+            tbody.innerHTML = '';
+            
+            for (let id in users) {
+                const u = users[id];
+                if (u.role === 'student' && u.group === className) {
+                    let currentMark = '—';
+                    if (u.marks_detailed) {
+                        const marks = Object.values(u.marks_detailed);
+                        const lastMark = marks.filter(m => m.subject === subject).pop();
+                        if (lastMark) currentMark = lastMark.value;
+                    }
+                    tbody.innerHTML += `<tr>
+                        <td><b>${u.name}</b><br><small>${id}</small></td>
+                        <td><span class="mark-badge mark-${currentMark}">${currentMark}</span></td>
+                        <td><input type="number" id="mark-${id}" class="mark-input" min="2" max="5" step="1" placeholder="2-5"></td>
+                        <td><button class="btn-primary" onclick="saveMark('${id}', '${subject}')"><i class="fas fa-save"></i> ОК</button></td>
+                    </tr>`;
+                }
+            }
+            if (tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="4">Нет учеников в этом классе</td></tr>';
+        };
+
+        // Сохранение оценки
+        window.saveMark = async (studentId, subject) => {
+            const markValue = document.getElementById(`mark-${studentId}`).value;
+            if (!markValue || markValue < 2 || markValue > 5) {
+                showToast('Введите оценку от 2 до 5!');
+                return;
+            }
+            const studentRef = ref(db, `users/${studentId}/marks_detailed`);
+            const snapshot = await get(studentRef);
+            let marks = snapshot.val() || {};
+            const newKey = `${subject}_${Date.now()}`;
+            marks[newKey] = {
+                subject: subject,
+                value: markValue,
+                date: new Date().toLocaleString(),
+                teacher: teacherData?.name || currentUser.id
+            };
+            await set(studentRef, marks);
+            showToast(`Оценка ${markValue} выставлена!`);
+            document.getElementById(`mark-${studentId}`).value = '';
+            loadClassStudents();
+            loadClassStats();
+            loadRating();
+        };
+
+        // Отправка ДЗ
+        window.sendHomework = async () => {
+            const className = document.getElementById('hw-class').value;
+            const subject = document.getElementById('hw-subject').value;
+            const text = document.getElementById('hw-text').value;
+            if (!className || !subject || !text) { showToast('Заполните все поля!'); return; }
+            const hwRef = ref(db, `homeworks/${className}`);
+            const newHw = push(hwRef);
+            await set(newHw, { subject, text, date: new Date().toLocaleString(), teacher: teacherData?.name || currentUser.id });
+            showToast(`ДЗ для ${className} отправлено!`);
+            document.getElementById('hw-text').value = '';
+            loadHomeworkHistory(className);
+        };
+
+        const loadHomeworkHistory = async (className) => {
+            if (!className) return;
+            const snap = await get(ref(db, `homeworks/${className}`));
+            const hw = snap.val();
+            const container = document.getElementById('hw-history');
+            container.innerHTML = '';
+            if (!hw) { container.innerHTML = '<p>Нет заданий</p>'; return; }
+            Object.values(hw).reverse().forEach(h => {
+                container.innerHTML += `<div class="homework-item"><strong>📖 ${h.subject}</strong> | 📅 ${h.date}<p style="margin-top: 8px;">${h.text}</p></div>`;
+            });
+        };
+
+        document.getElementById('hw-class')?.addEventListener('change', (e) => loadHomeworkHistory(e.target.value));
+
+        // Статистика класса
+        const loadClassStats = async () => {
+            if (!teacherClass) return;
+            const usersSnap = await get(ref(db, 'users'));
+            const users = usersSnap.val();
+            let students = 0, totalMarks = 0, markCount = 0;
+            const studentList = [];
+            
+            for (let id in users) {
+                const u = users[id];
+                if (u.role === 'student' && u.group === teacherClass) {
+                    students++;
+                    studentList.push({ id, name: u.name, marks: u.marks_detailed });
+                    if (u.marks_detailed) {
+                        const marks = Object.values(u.marks_detailed);
+                        marks.forEach(m => { totalMarks += parseInt(m.value) || 0; markCount++; });
+                    }
+                }
+            }
+            document.getElementById('students-count').innerText = students;
+            const avg = markCount > 0 ? (totalMarks / markCount).toFixed(1) : '0.0';
+            document.getElementById('class-avg').innerText = avg;
+            
+            // Список учеников
+            const studentsContainer = document.getElementById('students-list');
+            if (studentsContainer) {
+                studentsContainer.innerHTML = '';
+                studentList.forEach(s => {
+                    studentsContainer.innerHTML += `<div class="student-item"><strong>${s.name}</strong><br><small>Логин: ${s.id}</small></div>`;
+                });
+            }
+            
+            // Успеваемость (графики)
+            const progressContainer = document.getElementById('class-progress');
+            if (progressContainer) {
+                progressContainer.innerHTML = '';
+                const subjects = {};
+                for (let s of studentList) {
+                    if (s.marks) {
+                        Object.values(s.marks).forEach(m => {
+                            if (!subjects[m.subject]) subjects[m.subject] = [];
+                            subjects[m.subject].push(parseInt(m.value));
+                        });
+                    }
+                }
+                for (let subj in subjects) {
+                    const avgSubj = subjects[subj].reduce((a,b) => a + b, 0) / subjects[subj].length;
+                    const percent = (avgSubj / 5) * 100;
+                    progressContainer.innerHTML += `<div><b>${subj}</b></div><div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;">${avgSubj.toFixed(1)}</div></div>`;
+                }
+            }
+            
+            // Рейтинг
+            await loadRating();
+        };
+
+        // Рейтинг учеников
+        const loadRating = async () => {
+            if (!teacherClass) return;
+            const usersSnap = await get(ref(db, 'users'));
+            const users = usersSnap.val();
+            const rating = [];
+            for (let id in users) {
+                const u = users[id];
+                if (u.role === 'student' && u.group === teacherClass && u.marks_detailed) {
+                    const marks = Object.values(u.marks_detailed);
+                    const avg = marks.reduce((a,b) => a + parseInt(b.value), 0) / marks.length;
+                    rating.push({ name: u.name, avg: avg });
+                }
+            }
+            rating.sort((a,b) => b.avg - a.avg);
+            const container = document.getElementById('rating-list');
+            if (container) {
+                container.innerHTML = '';
+                rating.slice(0, 10).forEach((r, idx) => {
+                    container.innerHTML += `<div class="rank-item"><div class="rank-number">${idx + 1}</div><div><b>${r.name}</b><br>Средний балл: ${r.avg.toFixed(1)}</div></div>`;
+                });
+            }
+        };
+
+        // Расписание
+        const loadSchedule = async () => {
+            const snap = await get(ref(db, 'schedule'));
+            const schedule = snap.val();
+            const container = document.getElementById('schedule-list');
+            container.innerHTML = '';
+            if (!schedule) { container.innerHTML = '<p>Расписание не загружено</p>'; return; }
+            
+            const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+            days.forEach(day => {
+                const dayLessons = Object.values(schedule).filter(s => s.day === day);
+                if (dayLessons.length > 0) {
+                    let html = `<h3 style="margin-top: 20px;">📌 ${day}</h3>`;
+                    dayLessons.forEach(l => { html += `<div class="schedule-lesson"><span><b>${l.lesson}</b></span><span>${l.teacher}</span><span>${l.group}</span></div>`; });
+                    container.innerHTML += html;
+                }
+            });
+            
+            const today = new Date().toLocaleDateString('ru-RU', { weekday: 'long' });
+            const todayLessons = Object.values(schedule || {}).filter(s => s.day === today);
+            document.getElementById('today-lessons').innerText = todayLessons.length;
+        };
+
+        // Объявления
+        window.sendAnnouncement = async () => {
+            const title = document.getElementById('ann-title').value;
+            const text = document.getElementById('ann-text').value;
+            if (!title || !text) { showToast('Заполните заголовок и текст'); return; }
+            const newRef = push(ref(db, 'global_updates'));
+            await set(newRef, { title, text, date: new Date().toLocaleString(), teacher: teacherData?.name });
+            showToast('Объявление отправлено!');
+            document.getElementById('ann-title').value = '';
+            document.getElementById('ann-text').value = '';
+            loadAnnouncements();
+        };
+
+        const loadAnnouncements = async () => {
+            const snap = await get(ref(db, 'global_updates'));
+            const news = snap.val();
+            const container = document.getElementById('announcements-list');
+            const latestContainer = document.getElementById('latest-announcements');
+            container.innerHTML = '';
+            if (!news) { container.innerHTML = '<p>Нет объявлений</p>'; return; }
+            const newsArray = Object.values(news).reverse();
+            if (latestContainer && newsArray[0]) {
+                latestContainer.innerHTML = `<div style="border-left: 3px solid #667eea; padding-left: 15px;"><strong>${newsArray[0].title}</strong><br><small>${newsArray[0].date}</small><p>${newsArray[0].text}</p></div>`;
+            }
+            newsArray.forEach(n => {
+                container.innerHTML += `<div class="announcement-item"><strong>📢 ${n.title}</strong><br><small>${n.date}</small><p>${n.text}</p></div>`;
+            });
+        };
+
+        // Отчёт
+        window.exportReport = async () => {
+            const className = document.getElementById('report-class').value;
+            const type = document.getElementById('report-type').value;
+            if (!className) { showToast('Выберите класс'); return; }
+            showToast(`Отчёт по ${type} для ${className} готовится...`);
+        };
+
+        // Настройки
+        window.saveSettings = async () => {
+            const name = document.getElementById('teacher-name-input').value;
+            const group = document.getElementById('teacher-class-input').value;
+            const password = document.getElementById('teacher-password').value;
+            const updates = { name: name, group: group };
+            if (password) updates.pass = password;
+            await update(ref(db, `users/${currentUser.id}`), updates);
+            showToast('Настройки сохранены!');
+            teacherClass = group;
+            loadClassStats();
+        };
+
+        window.showPage = (page) => {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+            document.getElementById(`${page}-page`).classList.add('active');
+            event.target.closest('.menu-item').classList.add('active');
+        };
+
+        window.logout = () => {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'anim.html';
+        };
+
+        loadTeacherData();
+    </script>
+</body>
+</html>
