@@ -1,52 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- SEO мета-теги -->
-<meta name="description" content="IG Group - современная образовательная платформа для учеников, учителей и администрации. Электронный журнал, домашние задания, расписание и статистика успеваемости.">
-<meta name="keywords" content="IG Group, Imoposobl group, образование, школа, электронный журнал, оценки, домашнее задание, расписание, успеваемость, ученик, учитель, администратор">
-<meta name="author" content="IG Group">
-<meta name="robots" content="index, follow">
-<meta name="language" content="Russian">
-<meta name="revisit-after" content="7 days">
-<meta name="copyright" content="IG Group">
-
-<!-- Open Graph (для соцсетей) -->
-<meta property="og:title" content="IG Group | Образовательная платформа">
-<meta property="og:description" content="Современная образовательная платформа для управления учебным процессом">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://твой-логин.github.io">
-<meta property="og:image" content="https://твой-логин.github.io/logo.png">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IG Group | Образовательная платформа">
-<meta name="twitter:description" content="Современная образовательная платформа">
-
-<!-- Заголовок страницы -->
-<title>IG Group | Imoposobl Group - Образовательная платформа</title>
-
-<!-- Canonical URL -->
-<link rel="canonical" href="https://твой-логин.github.io">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>IG Group | Современная образовательная платформа</title>
+    <title>IG MAKTAB | Образовательный портал</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             overflow-x: hidden;
         }
-
-        /* Анимированные фоновые шары */
         .bg-orb {
             position: fixed;
             border-radius: 50%;
@@ -54,761 +21,322 @@
             pointer-events: none;
             z-index: 0;
         }
-
         .orb1 { width: 400px; height: 400px; top: -100px; left: -100px; animation: float1 25s infinite; }
         .orb2 { width: 600px; height: 600px; bottom: -200px; right: -150px; animation: float2 35s infinite; }
         .orb3 { width: 250px; height: 250px; top: 40%; left: 20%; animation: float3 18s infinite; }
         .orb4 { width: 180px; height: 180px; bottom: 20%; right: 10%; animation: float4 22s infinite; }
-
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(50px, 50px) rotate(180deg); }
-        }
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-50px, -30px) rotate(180deg); }
-        }
-        @keyframes float3 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -40px) scale(1.1); }
-        }
-        @keyframes float4 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-40px, 30px); }
-        }
-
-        /* Навигация */
+        .orb5 { width: 300px; height: 300px; top: 60%; left: 80%; animation: float1 28s infinite; }
+        .orb6 { width: 200px; height: 200px; top: 20%; left: 85%; animation: float3 20s infinite; }
+        @keyframes float1 { 0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(50px,50px) rotate(180deg)} }
+        @keyframes float2 { 0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(-50px,-30px) rotate(180deg)} }
+        @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.1)} }
+        @keyframes float4 { 0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,30px)} }
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            flex-wrap: wrap; gap: 15px;
         }
-
-        .logo {
-            font-size: clamp(20px, 5vw, 28px);
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Бургер-меню для мобильных */
-        .burger {
-            display: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: #667eea;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
+        .logo { font-size: clamp(20px,5vw,28px); font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .lang-switch { display: flex; gap: 8px; background: #f0f0f0; padding: 5px; border-radius: 40px; }
+        .lang-btn { background: none; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.3s; color: #666; }
+        .lang-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; box-shadow: 0 2px 10px rgba(102,126,234,0.3); }
+        .burger { display: none; cursor: pointer; font-size: 24px; color: #667eea; }
+        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; cursor: pointer; font-size: 14px; }
         .nav-links a:hover { color: #667eea; }
-
-        /* Основной контейнер */
-        .container {
-            position: relative;
-            z-index: 10;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 20px 40px;
-        }
-
-        /* Hero секция */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            padding: 40px 0;
-        }
-
-        .hero-content {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .online-badge {
-            display: inline-block;
-            background: rgba(76, 175, 80, 0.2);
-            backdrop-filter: blur(5px);
-            padding: 8px 20px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4caf50;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(32px, 6vw, 56px);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 0%, #e0d4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: clamp(14px, 4vw, 18px);
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat .number {
-            font-size: clamp(28px, 5vw, 36px);
-            font-weight: 800;
-            color: white;
-        }
-
-        .hero-stat .label {
-            font-size: 12px;
-            color: rgba(255,255,255,0.7);
-        }
-
-        /* Форма входа */
-        .login-card {
-            flex: 1;
-            min-width: 280px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 32px;
-            padding: clamp(25px, 5vw, 40px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-        }
-
-        .login-card h2 {
-            font-size: clamp(22px, 5vw, 28px);
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .login-card .subtitle {
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 16px;
-            font-size: 16px;
-            transition: all 0.3s;
-            outline: none;
-        }
-
-        .input-group input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-login:active {
-            transform: scale(0.98);
-        }
-
-        .demo-info {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 16px;
-            font-size: 12px;
-        }
-
-        /* Секции */
-        .section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(28px, 6vw, 42px);
-            font-weight: 700;
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            font-size: clamp(14px, 4vw, 18px);
-            margin-bottom: 40px;
-        }
-
-        /* Сетки */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 25px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .feature-card:active {
-            transform: scale(0.98);
-        }
-
-        .feature-icon {
-            width: 55px;
-            height: 55px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 18px;
-        }
-
-        .feature-icon i {
-            font-size: 26px;
-            color: white;
-        }
-
-        .feature-card h3 {
-            font-size: clamp(18px, 4vw, 22px);
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .feature-card p {
-            color: rgba(255,255,255,0.8);
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        /* Статистика */
-        .stats-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: clamp(30px, 5vw, 60px);
-            margin: 30px 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-
-        .stat-item .number {
-            font-size: clamp(32px, 6vw, 48px);
-            font-weight: 800;
-            color: #ffd700;
-        }
-
-        .stat-item .label {
-            font-size: 14px;
-            color: rgba(255,255,255,0.9);
-            margin-top: 8px;
-        }
-
-        /* Отзывы */
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .review-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 25px;
-        }
-
-        .review-text {
-            font-size: 14px;
-            color: rgba(255,255,255,0.9);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .review-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .review-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .review-author h4 {
-            color: white;
-            font-size: 16px;
-        }
-
-        .review-author p {
-            color: rgba(255,255,255,0.7);
-            font-size: 12px;
-        }
-
-        /* FAQ */
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 16px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: white;
-            font-size: clamp(14px, 4vw, 18px);
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 20px 18px;
-            max-height: 200px;
-        }
-
-        /* Контакты */
-        .contact-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: clamp(30px, 5vw, 60px);
-            text-align: center;
-        }
-
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: white;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #667eea;
-            font-weight: 600;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .contact-btn:active {
-            transform: scale(0.97);
-        }
-
-        /* Подвал */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: rgba(255,255,255,0.7);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 50px;
-            font-size: 13px;
-        }
-
-        /* ========== АДАПТИВНЫЕ СТИЛИ ========== */
-
-        /* Планшеты (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .container {
-                padding: 70px 20px 30px;
-            }
-            .hero {
-                gap: 40px;
-            }
-        }
-
-        /* Планшеты вертикальные (600px - 768px) */
+        .container { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 100px 20px 40px; }
+        .hero { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px; padding: 40px 0; }
+        .hero-content { flex: 1; min-width: 280px; }
+        .online-badge { display: inline-block; background: rgba(76, 175, 80, 0.2); backdrop-filter: blur(5px); padding: 8px 20px; border-radius: 50px; margin-bottom: 20px; font-size: 14px; font-weight: 600; color: #4caf50; }
+        .hero-content h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(135deg, #fff 0%, #e0d4ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-content p { font-size: clamp(14px, 4vw, 18px); color: rgba(255,255,255,0.9); margin-bottom: 30px; line-height: 1.6; }
+        .hero-stats { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+        .hero-stat { text-align: center; }
+        .hero-stat .number { font-size: clamp(28px, 5vw, 36px); font-weight: 800; color: white; }
+        .hero-stat .label { font-size: 12px; color: rgba(255,255,255,0.7); }
+        .login-card { flex: 1; min-width: 280px; background: rgba(255, 255, 255, 0.98); border-radius: 32px; padding: clamp(25px, 5vw, 40px); box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
+        .login-card h2 { font-size: clamp(22px, 5vw, 28px); color: #333; margin-bottom: 10px; }
+        .login-card .subtitle { color: #666; margin-bottom: 25px; font-size: 14px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; color: #333; font-weight: 500; font-size: 14px; }
+        .input-group input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 16px; font-size: 16px; transition: all 0.3s; outline: none; }
+        .input-group input:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); }
+        .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 16px; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.3s; }
+        .demo-info { margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 16px; font-size: 12px; }
+        .section { padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .section-title { text-align: center; font-size: clamp(28px, 6vw, 42px); font-weight: 700; color: white; margin-bottom: 15px; }
+        .section-subtitle { text-align: center; color: rgba(255,255,255,0.8); font-size: clamp(14px, 4vw, 18px); margin-bottom: 50px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .feature-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 24px; padding: 25px; transition: all 0.3s; cursor: pointer; }
+        .feature-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.2); }
+        .feature-icon { width: 55px; height: 55px; background: rgba(255,255,255,0.2); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+        .feature-icon i { font-size: 26px; color: white; }
+        .stats-section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 30px; padding: clamp(30px, 5vw, 60px); margin: 30px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 30px; text-align: center; }
+        .stat-item .number { font-size: clamp(32px, 6vw, 48px); font-weight: 800; color: #ffd700; }
+        .stat-item .label { font-size: 14px; color: rgba(255,255,255,0.9); margin-top: 8px; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .review-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 24px; padding: 25px; }
+        .review-text { font-size: 14px; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 20px; font-style: italic; }
+        .review-author { display: flex; align-items: center; gap: 15px; }
+        .review-author .avatar { width: 50px; height: 50px; border-radius: 50%; background: #667eea; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; }
+        .slider-container { position: relative; overflow: hidden; border-radius: 24px; margin: 40px 0; }
+        .slider-track { display: flex; transition: transform 0.5s ease; }
+        .slider-slide { min-width: 100%; padding: 40px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 24px; text-align: center; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; color: white; font-size: 20px; }
+        .slider-prev { left: 10px; }
+        .slider-next { right: 10px; }
+        .dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; }
+        .dot.active { background: white; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 2000; }
+        .modal.active { display: flex; }
+        .modal-content { background: #1a1a3a; border-radius: 24px; padding: 30px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .modal-content h3 { color: white; margin-bottom: 20px; }
+        .modal-content p { color: #ccc; margin-bottom: 15px; line-height: 1.6; }
+        .close-modal { background: #ff3b30; color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin-top: 20px; }
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; margin-bottom: 12px; overflow: hidden; }
+        .faq-question { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: white; font-size: clamp(14px, 4vw, 18px); }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s; color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 14px; }
+        .faq-item.active .faq-answer { padding: 0 20px 18px; max-height: 200px; }
+        .contact-section { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 30px; padding: clamp(30px, 5vw, 60px); text-align: center; }
+        .contact-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 25px; }
+        .contact-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: white; border-radius: 50px; text-decoration: none; color: #667eea; font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .footer { text-align: center; padding: 30px 20px; color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; font-size: 13px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        .social-links a { color: white; font-size: 24px; transition: 0.3s; }
         @media (max-width: 768px) {
-            .navbar {
-                padding: 12px 20px;
-            }
-            
-            .burger {
-                display: block;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.show {
-                display: flex;
-            }
-            
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 0;
-            }
-            
-            .hero-stats {
-                justify-content: center;
-            }
-            
-            .section {
-                padding: 40px 0;
-            }
-            
-            .stats-section {
-                padding: 30px 20px;
-            }
+            .navbar { flex-direction: column; }
+            .burger { display: block; }
+            .nav-links { display: none; position: absolute; top: 100px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 15px; }
+            .nav-links.show { display: flex; }
+            .hero { flex-direction: column; text-align: center; }
+            .section { padding: 40px 0; }
         }
-
-        /* Мобильные телефоны (320px - 600px) */
-        @media (max-width: 600px) {
-            .container {
-                padding: 60px 15px 20px;
-            }
-            
-            .hero-content h1 {
-                font-size: 28px;
-            }
-            
-            .hero-content p {
-                font-size: 14px;
-            }
-            
-            .hero-stats {
-                gap: 20px;
-            }
-            
-            .hero-stat .number {
-                font-size: 24px;
-            }
-            
-            .hero-stat .label {
-                font-size: 10px;
-            }
-            
-            .login-card {
-                padding: 25px;
-            }
-            
-            .login-card h2 {
-                font-size: 22px;
-            }
-            
-            .features-grid {
-                gap: 15px;
-            }
-            
-            .feature-card {
-                padding: 20px;
-            }
-            
-            .stats-grid {
-                gap: 20px;
-            }
-            
-            .stat-item .number {
-                font-size: 28px;
-            }
-            
-            .reviews-grid {
-                gap: 15px;
-            }
-            
-            .review-card {
-                padding: 20px;
-            }
-            
-            .contact-buttons {
-                gap: 10px;
-            }
-            
-            .contact-btn {
-                padding: 10px 18px;
-                font-size: 12px;
-            }
-        }
-
-        /* Очень маленькие телефоны (до 380px) */
-        @media (max-width: 380px) {
-            .hero-content h1 {
-                font-size: 24px;
-            }
-            
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-up {
-            animation: fadeInUp 0.6s ease forwards;
-        }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 12px 24px; border-radius: 12px; z-index: 1100; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="bg-orb orb1"></div>
-    <div class="bg-orb orb2"></div>
-    <div class="bg-orb orb3"></div>
-    <div class="bg-orb orb4"></div>
+    <div class="bg-orb orb1"></div><div class="bg-orb orb2"></div><div class="bg-orb orb3"></div><div class="bg-orb orb4"></div><div class="bg-orb orb5"></div><div class="bg-orb orb6"></div>
 
     <nav class="navbar">
-        <div class="logo">🎓 IG Group</div>
-        <div class="burger" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
+        <div class="logo">🎓 IG MAKTAB</div>
+        <div class="lang-switch" id="langSwitch">
+            <button class="lang-btn active" data-lang="ru">🇷🇺 Рус</button>
+            <button class="lang-btn" data-lang="tj">🇹🇯 Тоҷикӣ</button>
+            <button class="lang-btn" data-lang="en">🇬🇧 English</button>
         </div>
+        <div class="burger" onclick="toggleMenu()">☰</div>
         <div class="nav-links" id="navLinks">
-            <a onclick="scrollToSection('home'); closeMenu()">Главная</a>
-            <a onclick="scrollToSection('features'); closeMenu()">Возможности</a>
-            <a onclick="scrollToSection('reviews'); closeMenu()">Отзывы</a>
-            <a onclick="scrollToSection('faq'); closeMenu()">FAQ</a>
-            <a onclick="scrollToSection('contact'); closeMenu()">Контакты</a>
+            <a data-key="nav_home" onclick="scrollToSection('home'); closeMenu()">Главная</a>
+            <a data-key="nav_about" onclick="scrollToSection('about'); closeMenu()">О нас</a>
+            <a data-key="nav_library" onclick="scrollToSection('library'); closeMenu()">Библиотека</a>
+            <a data-key="nav_circles" onclick="scrollToSection('circles'); closeMenu()">Кружки</a>
+            <a data-key="nav_olympiads" onclick="scrollToSection('olympiads'); closeMenu()">Олимпиады</a>
+            <a data-key="nav_news" onclick="scrollToSection('news'); closeMenu()">Новости</a>
+            <a data-key="nav_teachers" onclick="scrollToSection('teachers'); closeMenu()">Учителя</a>
+            <a data-key="nav_gallery" onclick="scrollToSection('gallery'); closeMenu()">Галерея</a>
+            <a data-key="nav_faq" onclick="scrollToSection('faq'); closeMenu()">FAQ</a>
+            <a data-key="nav_contact" onclick="scrollToSection('contact'); closeMenu()">Контакты</a>
         </div>
     </nav>
 
     <div class="container">
-        <!-- Hero секция -->
+        <!-- HERO -->
         <div class="hero" id="home">
             <div class="hero-content fade-up">
-                <div class="online-badge">
-                    <i class="fas fa-circle" style="font-size: 10px; margin-right: 8px; color: #4caf50;"></i>
-                    Сейчас онлайн: <span id="online-count">0</span> пользователей
-                </div>
-                <h1>Современное образование<br>в цифровом формате</h1>
-                <p>IG Group — это инновационная платформа для управления учебным процессом. Ученики, учителя и администрация работают в единой экосистеме.</p>
+                <div class="online-badge">🟢 <span data-key="online_now">Сейчас онлайн</span>: <span id="online-count">0</span> <span data-key="users">пользователей</span></div>
+                <h1 data-key="hero_title">IG MAKTAB<br>Образование нового поколения</h1>
+                <p data-key="hero_desc">Современная образовательная платформа, объединяющая учеников, учителей и родителей в едином цифровом пространстве. Доступ к знаниям 24/7.</p>
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="number" id="hero-students">0</div>
-                        <div class="label">Учеников</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="number" id="hero-teachers">0</div>
-                        <div class="label">Учителей</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="number" id="hero-marks">0</div>
-                        <div class="label">Оценок</div>
-                    </div>
+                    <div class="hero-stat"><div class="number" id="hero-students">0</div><div class="label" data-key="stat_students">Учеников</div></div>
+                    <div class="hero-stat"><div class="number" id="hero-teachers">0</div><div class="label" data-key="stat_teachers">Учителей</div></div>
+                    <div class="hero-stat"><div class="number" id="hero-marks">0</div><div class="label" data-key="stat_marks">Оценок</div></div>
                 </div>
             </div>
-
             <div class="login-card fade-up">
-                <h2>Вход в систему</h2>
-                <p class="subtitle">Введите свои данные для доступа</p>
-                <div class="input-group">
-                    <label><i class="fas fa-user"></i> Логин / ID</label>
-                    <input type="text" id="login-input" placeholder="Введите логин">
-                </div>
-                <div class="input-group">
-                    <label><i class="fas fa-lock"></i> Пароль</label>
-                    <input type="password" id="password-input" placeholder="Введите пароль">
-                </div>
-                <button class="btn-login" onclick="login()">
-                    <i class="fas fa-arrow-right-to-bracket"></i> Войти в кабинет
-                </button>
-                <div class="demo-info">
-                    <p><strong>📚 Демо-доступ:</strong></p>
-                    <p>👨‍🎓 <strong>Ученик:</strong> student / 123</p>
-                    <p>👨‍🏫 <strong>Учитель:</strong> teacher / 123</p>
-                    <p>👑 <strong>Администратор:</strong> master / 123</p>
-                </div>
+                <h2 data-key="login_title">Вход в кабинет</h2>
+                <p class="subtitle" data-key="login_sub">Введите логин и пароль</p>
+                <div class="input-group"><label data-key="login_label">Логин / ID</label><input type="text" id="login-input" placeholder="student / teacher / master"></div>
+                <div class="input-group"><label data-key="pass_label">Пароль</label><input type="password" id="password-input" placeholder="123"></div>
+                <button class="btn-login" onclick="login()" data-key="login_btn">Войти →</button>
+                <div class="demo-info"><strong data-key="demo_title">📚 Демо-доступ:</strong><p>👨‍🎓 <strong data-key="student_label">Ученик:</strong> student / 123</p><p>👨‍🏫 <strong data-key="teacher_label">Учитель:</strong> teacher / 123</p><p>👑 <strong data-key="admin_label">Администратор:</strong> master / 123</p></div>
             </div>
         </div>
 
-        <!-- О проекте -->
-        <div class="section" id="about">
-            <h2 class="section-title">О платформе IG Group</h2>
-            <p class="section-subtitle">Мы создаём будущее образования уже сегодня</p>
+        <!-- О ПЛАТФОРМЕ -->
+        <div class="section" id="about"><h2 class="section-title" data-key="about_title">🌟 О платформе IG MAKTAB</h2><p class="section-subtitle" data-key="about_sub">Мы создаём будущее образования уже сегодня</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
-                    <h3>Современные технологии</h3>
-                    <p>Используем Firebase для мгновенной синхронизации данных и высокой производительности.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Безопасность данных</h3>
-                    <p>Все данные защищены и хранятся в надёжном облачном хранилище.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Аналитика успеваемости</h3>
-                    <p>Подробная статистика и графики успеваемости для каждого ученика и класса.</p>
-                </div>
+                <div class="feature-card" onclick="showToast('Современные технологии: Firebase, AI')"><div class="feature-icon"><i class="fas fa-rocket"></i></div><h3 data-key="tech_title">Современные технологии</h3><p data-key="tech_desc">Используем Firebase для мгновенной синхронизации данных и высокой производительности.</p></div>
+                <div class="feature-card" onclick="showToast('Безопасность: шифрование 256 бит')"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3 data-key="security_title">Безопасность данных</h3><p data-key="security_desc">Все данные защищены и хранятся в надёжном облачном хранилище.</p></div>
+                <div class="feature-card" onclick="showToast('Аналитика успеваемости в реальном времени')"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3 data-key="analytics_title">Аналитика успеваемости</h3><p data-key="analytics_desc">Подробная статистика и графики успеваемости для каждого ученика и класса.</p></div>
             </div>
         </div>
 
-        <!-- Возможности -->
-        <div class="section" id="features">
-            <h2 class="section-title">Что вы можете делать?</h2>
-            <p class="section-subtitle">Все инструменты для эффективного обучения</p>
+        <!-- ВОЗМОЖНОСТИ -->
+        <div class="section"><h2 class="section-title" data-key="features_title">Что вы можете делать?</h2><p class="section-subtitle" data-key="features_sub">Все инструменты для эффективного обучения</p>
             <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-star"></i></div><h3>📊 Электронный журнал</h3><p>Выставление оценок, просмотр успеваемости, автоматический расчёт среднего балла.</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-book"></i></div><h3>📚 Домашние задания</h3><p>Учителя выдают ДЗ, ученики видят задания в реальном времени.</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar"></i></div><h3>📅 Расписание уроков</h3><p>Удобное расписание для каждого класса с фильтрацией по дням.</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-users"></i></div><h3>👥 Управление классом</h3><p>Кураторы видят успеваемость своего класса и проблемные зоны.</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-newspaper"></i></div><h3>📢 Новости и объявления</h3><p>Администрация отправляет важные новости всем пользователям.</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-database"></i></div><h3>💾 Резервное копирование</h3><p>Экспорт и импорт базы данных в формате JSON.</p></div>
+                <div class="feature-card" onclick="showToast('Электронный журнал: оценки, средний балл')"><div class="feature-icon"><i class="fas fa-star"></i></div><h3>📊 Электронный журнал</h3><p>Выставление оценок, просмотр успеваемости, автоматический расчёт среднего балла.</p></div>
+                <div class="feature-card" onclick="showToast('Домашние задания: выдача и просмотр')"><div class="feature-icon"><i class="fas fa-book"></i></div><h3>📚 Домашние задания</h3><p>Учителя выдают ДЗ, ученики видят задания в реальном времени.</p></div>
+                <div class="feature-card" onclick="showToast('Расписание уроков с фильтрацией')"><div class="feature-icon"><i class="fas fa-calendar"></i></div><h3>📅 Расписание уроков</h3><p>Удобное расписание для каждого класса с фильтрацией по дням.</p></div>
+                <div class="feature-card" onclick="showToast('Управление классом и успеваемостью')"><div class="feature-icon"><i class="fas fa-users"></i></div><h3>👥 Управление классом</h3><p>Кураторы видят успеваемость своего класса и проблемные зоны.</p></div>
+                <div class="feature-card" onclick="showToast('Новости и объявления от администрации')"><div class="feature-icon"><i class="fas fa-newspaper"></i></div><h3>📢 Новости и объявления</h3><p>Администрация отправляет важные новости всем пользователям.</p></div>
+                <div class="feature-card" onclick="showToast('Резервное копирование в JSON')"><div class="feature-icon"><i class="fas fa-database"></i></div><h3>💾 Резервное копирование</h3><p>Экспорт и импорт базы данных в формате JSON.</p></div>
             </div>
         </div>
 
-        <!-- Статистика -->
-        <div class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item"><div class="number" id="stat-students">0</div><div class="label">Активных учеников</div></div>
-                <div class="stat-item"><div class="number" id="stat-teachers">0</div><div class="label">Квалифицированных учителей</div></div>
-                <div class="stat-item"><div class="number" id="stat-marks">0</div><div class="label">Выставлено оценок</div></div>
-                <div class="stat-item"><div class="number" id="stat-homeworks">0</div><div class="label">Домашних заданий</div></div>
+        <!-- СТАТИСТИКА -->
+        <div class="stats-section"><div class="stats-grid">
+            <div class="stat-item"><div class="number" id="stat-students">0</div><div class="label" data-key="stat_students">Активных учеников</div></div>
+            <div class="stat-item"><div class="number" id="stat-teachers">0</div><div class="label" data-key="stat_teachers">Учителей</div></div>
+            <div class="stat-item"><div class="number" id="stat-marks">0</div><div class="label" data-key="stat_marks">Оценок</div></div>
+            <div class="stat-item"><div class="number" id="stat-homeworks">0</div><div class="label" data-key="stat_homeworks">ДЗ</div></div>
+            <div class="stat-item"><div class="number">5000+</div><div class="label" data-key="stat_books">Книг в библиотеке</div></div>
+            <div class="stat-item"><div class="number">12</div><div class="label" data-key="stat_circles">Кружков</div></div>
+        </div></div>
+
+        <!-- СЛАЙДЕР ДОСТИЖЕНИЙ -->
+        <div class="section"><h2 class="section-title" data-key="slider_title">🏆 Наши достижения</h2><p class="section-subtitle" data-key="slider_sub">Гордость нашей школы</p>
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-slide" onclick="showToast('Поздравляем! 1 место по математике')"><i class="fas fa-trophy" style="font-size: 60px; color: #ffd700;"></i><h3 style="margin: 20px 0;">1 место на Республиканской олимпиаде</h3><p>Ученик 11 класса Иванов Иван занял 1 место по математике</p><span style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: #ffd700; border-radius: 30px; color: #333;">2024 год</span></div>
+                    <div class="slider-slide" onclick="showToast('Серебро по физике!')"><i class="fas fa-medal" style="font-size: 60px; color: #c0c0c0;"></i><h3 style="margin: 20px 0;">2 место на Международной олимпиаде</h3><p>Команда школы заняла 2 место по физике в Таджикистане</p><span style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: #c0c0c0; border-radius: 30px; color: #333;">2024 год</span></div>
+                    <div class="slider-slide" onclick="showToast('Бронза на IT-хакатоне!')"><i class="fas fa-award" style="font-size: 60px; color: #cd7f32;"></i><h3 style="margin: 20px 0;">3 место на Хакатоне</h3><p>Наши ученики заняли 3 место в IT-хакатоне среди школ</p><span style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: #cd7f32; border-radius: 30px; color: white;">2023 год</span></div>
+                    <div class="slider-slide" onclick="showToast('Лучшая школа 2024!')"><i class="fas fa-crown" style="font-size: 60px; color: #ffd700;"></i><h3 style="margin: 20px 0;">Лучшая школа года</h3><p>Признана лучшей школой по итогам 2024 года</p><span style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: #ffd700; border-radius: 30px; color: #333;">2024 год</span></div>
+                </div>
+                <button class="slider-btn slider-prev" onclick="prevSlide()">❮</button>
+                <button class="slider-btn slider-next" onclick="nextSlide()">❯</button>
+                <div class="dots" id="dots"></div>
             </div>
         </div>
 
-        <!-- Отзывы -->
-        <div class="section" id="reviews">
-            <h2 class="section-title">Что говорят о нас</h2>
-            <p class="section-subtitle">Реальные отзывы наших пользователей</p>
+        <!-- БИБЛИОТЕКА -->
+        <div class="section" id="library"><h2 class="section-title" data-key="library_title">📚 Библиотека знаний</h2><p class="section-subtitle" data-key="library_sub">Доступ к тысячам учебников и материалов</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="openLibrary('Математика')"><i class="fas fa-calculator" style="font-size: 40px; margin-bottom: 15px;"></i><h3>Математика</h3><p>150+ учебников и задачников</p></div>
+                <div class="feature-card" onclick="openLibrary('Физика')"><i class="fas fa-atom" style="font-size: 40px; margin-bottom: 15px;"></i><h3>Физика</h3><p>120+ учебников и лабораторных</p></div>
+                <div class="feature-card" onclick="openLibrary('Химия')"><i class="fas fa-flask" style="font-size: 40px; margin-bottom: 15px;"></i><h3>Химия</h3><p>100+ учебников и задач</p></div>
+                <div class="feature-card" onclick="openLibrary('Биология')"><i class="fas fa-dna" style="font-size: 40px; margin-bottom: 15px;"></i><h3>Биология</h3><p>90+ учебников и атласов</p></div>
+                <div class="feature-card" onclick="openLibrary('История')"><i class="fas fa-landmark" style="font-size: 40px; margin-bottom: 15px;"></i><h3>История</h3><p>110+ учебников и карт</p></div>
+                <div class="feature-card" onclick="openLibrary('Английский язык')"><i class="fas fa-language" style="font-size: 40px; margin-bottom: 15px;"></i><h3>Английский язык</h3><p>200+ учебников и аудио</p></div>
+            </div>
+        </div>
+
+        <!-- КРУЖКИ -->
+        <div class="section" id="circles"><h2 class="section-title" data-key="circles_title">🎯 Кружки и секции</h2><p class="section-subtitle" data-key="circles_sub">Развивай свои таланты</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showCircleInfo('Робототехника','Пн/Ср 15:00-17:00, каб.210, преподаватель Иванов А.А.')"><i class="fas fa-robot"></i><h3>Робототехника</h3><p>Пн/Ср 15:00-17:00</p></div>
+                <div class="feature-card" onclick="showCircleInfo('Футбол','Вт/Чт 16:00-18:00, стадион, тренер Козлов С.Н.')"><i class="fas fa-futbol"></i><h3>Футбол</h3><p>Вт/Чт 16:00-18:00</p></div>
+                <div class="feature-card" onclick="showCircleInfo('Изостудия','Ср/Пт 14:00-16:00, каб.105, Петрова М.И.')"><i class="fas fa-palette"></i><h3>Изостудия</h3><p>Ср/Пт 14:00-16:00</p></div>
+                <div class="feature-card" onclick="showCircleInfo('Музыка','Пн/Ср/Пт 16:00-18:00, Смирнов Д.В.')"><i class="fas fa-music"></i><h3>Музыкальная школа</h3><p>Пн/Ср/Пт 16:00-18:00</p></div>
+                <div class="feature-card" onclick="showCircleInfo('Шахматы','Пн/Пт 15:00-17:00, каб.308, гроссмейстер Н.П.')"><i class="fas fa-chess"></i><h3>Шахматы</h3><p>Пн/Пт 15:00-17:00</p></div>
+                <div class="feature-card" onclick="showCircleInfo('Театр','Сб 11:00-13:00, актовый зал, Васильева А.К.')"><i class="fas fa-theater-masks"></i><h3>Театральная студия</h3><p>Сб 11:00-13:00</p></div>
+            </div>
+        </div>
+
+        <!-- ОЛИМПИАДЫ -->
+        <div class="section" id="olympiads"><h2 class="section-title" data-key="olympiad_title">🏆 Олимпиады и конкурсы</h2><p class="section-subtitle" data-key="olympiad_sub">Достижения и планы</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showOlympiadInfo('2024 год','3 золота, 5 серебра, 7 бронзы на республиканских олимпиадах')"><i class="fas fa-medal"></i><h3>2024 год</h3><p>🥇 3 золота, 5 серебра, 7 бронзы</p></div>
+                <div class="feature-card" onclick="showOlympiadInfo('Международные','Участие в олимпиадах по физике, математике, информатике (Стамбул, Москва, Бишкек)')"><i class="fas fa-globe"></i><h3>Международные</h3><p>Участие в олимпиадах по физике, математике</p></div>
+                <div class="feature-card" onclick="showOlympiadInfo('Планы 2025','Открытие центра олимпиадной подготовки, онлайн-курсы от призёров')"><i class="fas fa-chart-line"></i><h3>Планы 2025</h3><p>Открытие центра олимпиадной подготовки</p></div>
+            </div>
+        </div>
+
+        <!-- НАШИ ОЛИМПИЙЦЫ -->
+        <div class="stats-section"><h2 class="section-title" style="font-size: 32px;" data-key="olympians_title">🥇 Наши олимпийцы</h2><p class="section-subtitle" data-key="olympians_sub">Золотые медалисты и призёры</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showToast('Рахимов Карим - золото по математике')"><div style="font-size: 40px; text-align: center;">🥇</div><h3>Рахимов Карим</h3><p>1 место - Математика</p><small>Республиканская олимпиада 2024</small></div>
+                <div class="feature-card" onclick="showToast('Содикова Лайло - серебро по физике')"><div style="font-size: 40px; text-align: center;">🥈</div><h3>Содикова Лайло</h3><p>2 место - Физика</p><small>Международная олимпиада 2024</small></div>
+                <div class="feature-card" onclick="showToast('Назаров Алишер - бронза по информатике')"><div style="font-size: 40px; text-align: center;">🥉</div><h3>Назаров Алишер</h3><p>3 место - Информатика</p><small>Республиканская олимпиада 2024</small></div>
+                <div class="feature-card" onclick="showToast('Хасанова Фатима - Гран-при по химии')"><div style="font-size: 40px; text-align: center;">🏅</div><h3>Хасанова Фатима</h3><p>Гран-при - Химия</p><small>Научный конкурс 2024</small></div>
+            </div>
+        </div>
+
+        <!-- НОВОСТИ -->
+        <div class="section" id="news"><h2 class="section-title" data-key="news_title">📰 Последние новости школы</h2><p class="section-subtitle" data-key="news_sub">Будьте в курсе событий</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showNews('День открытых дверей','15 мая 2025 в 10:00. Экскурсии, мастер-классы, встречи с учителями.')"><i class="fas fa-calendar"></i><h3>День открытых дверей</h3><p>15 мая 2025, 10:00</p><small>2 дня назад</small></div>
+                <div class="feature-card" onclick="showNews('Итоги олимпиады','Поздравляем победителей! 1 место — Рахимов К., 2 место — Содикова Л.')"><i class="fas fa-trophy"></i><h3>Итоги олимпиады</h3><p>Поздравляем победителей!</p><small>5 дней назад</small></div>
+                <div class="feature-card" onclick="showNews('Хакатон IT-прорыв','20 мая в 14:00 в IT-лаборатории. Регистрация до 15 мая.')"><i class="fas fa-laptop-code"></i><h3>Хакатон "IT-прорыв"</h3><p>20 мая в 14:00</p><small>1 неделя назад</small></div>
+                <div class="feature-card" onclick="showNews('Выпускной 2025','25 июня в 16:00 в актовом зале. Торжественное вручение аттестатов.')"><i class="fas fa-graduation-cap"></i><h3>Выпускной 2025</h3><p>25 июня в 16:00</p><small>10 дней назад</small></div>
+            </div>
+        </div>
+
+        <!-- УЧИТЕЛЯ -->
+        <div class="section" id="teachers"><h2 class="section-title" data-key="teachers_title">👨‍🏫 Наши лучшие учителя</h2><p class="section-subtitle" data-key="teachers_sub">Профессионалы своего дела</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showToast('Анна Ивановна - учитель математики, стаж 15 лет')"><i class="fas fa-chalkboard-user"></i><h3>Анна Иванова</h3><p>Учитель математики, стаж 15 лет</p></div>
+                <div class="feature-card" onclick="showToast('Сергей Петрович - учитель физики, стаж 12 лет')"><i class="fas fa-chalkboard-user"></i><h3>Сергей Петров</h3><p>Учитель физики, стаж 12 лет</p></div>
+                <div class="feature-card" onclick="showToast('Елена Сергеевна - учитель английского, стаж 10 лет')"><i class="fas fa-chalkboard-user"></i><h3>Елена Смирнова</h3><p>Учитель английского, стаж 10 лет</p></div>
+                <div class="feature-card" onclick="showToast('Мария Ивановна - учитель химии, стаж 8 лет')"><i class="fas fa-chalkboard-user"></i><h3>Мария Козлова</h3><p>Учитель химии, стаж 8 лет</p></div>
+            </div>
+        </div>
+
+        <!-- ОТЗЫВЫ -->
+        <div class="section"><h2 class="section-title" data-key="reviews_title">Что говорят о нас</h2><p class="section-subtitle" data-key="reviews_sub">Реальные отзывы наших пользователей</p>
             <div class="reviews-grid">
-                <div class="review-card"><p class="review-text">"Отличная платформа! Удобно выставлять оценки, дети видят всё в реальном времени. Расписание и ДЗ — супер!"</p><div class="review-author"><div style="width:50px;height:50px;border-radius:50%;background:#667eea;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">А</div><div><h4>Анна Иванова</h4><p>Учитель математики</p></div></div></div>
-                <div class="review-card"><p class="review-text">"Как ученику, мне нравится видеть свои оценки и домашку в одном месте. Удобно и понятно!"</p><div class="review-author"><div style="width:50px;height:50px;border-radius:50%;background:#764ba2;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">М</div><div><h4>Максим Петров</h4><p>Ученик 11 класса</p></div></div></div>
-                <div class="review-card"><p class="review-text">"Админ-панель позволяет полностью управлять системой. Бэкапы, предметы, расписание — всё под контролем!"</p><div class="review-author"><div style="width:50px;height:50px;border-radius:50%;background:#ff9800;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">Д</div><div><h4>Дмитрий Сидоров</h4><p>Администратор школы</p></div></div></div>
+                <div class="review-card"><p class="review-text">"Отличная платформа! Удобно выставлять оценки, дети видят всё в реальном времени. Расписание и ДЗ — супер!"</p><div class="review-author"><div class="avatar">А</div><div><h4>Анна Иванова</h4><p>Учитель математики</p></div></div></div>
+                <div class="review-card"><p class="review-text">"Как ученику, мне нравится видеть свои оценки и домашку в одном месте. Удобно и понятно!"</p><div class="review-author"><div class="avatar">М</div><div><h4>Максим Петров</h4><p>Ученик 11 класса</p></div></div></div>
+                <div class="review-card"><p class="review-text">"Админ-панель позволяет полностью управлять системой. Бэкапы, предметы, расписание — всё под контролем!"</p><div class="review-author"><div class="avatar">Д</div><div><h4>Дмитрий Сидоров</h4><p>Администратор школы</p></div></div></div>
+            </div>
+        </div>
+
+        <!-- ГАЛЕРЕЯ -->
+        <div class="section" id="gallery"><h2 class="section-title" data-key="gallery_title">📸 Фотогалерея</h2><p class="section-subtitle" data-key="gallery_sub">Лучшие моменты школьной жизни</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showToast('Урок математики')"><i class="fas fa-chalkboard"></i><h3>Урок математики</h3></div>
+                <div class="feature-card" onclick="showToast('IT-класс')"><i class="fas fa-laptop-code"></i><h3>IT-класс</h3></div>
+                <div class="feature-card" onclick="showToast('Концерт')"><i class="fas fa-microphone-alt"></i><h3>Концерт</h3></div>
+                <div class="feature-card" onclick="showToast('Спорт')"><i class="fas fa-futbol"></i><h3>Спорт</h3></div>
+                <div class="feature-card" onclick="showToast('Рисование')"><i class="fas fa-palette"></i><h3>Рисование</h3></div>
+                <div class="feature-card" onclick="showToast('Роботы')"><i class="fas fa-robot"></i><h3>Роботы</h3></div>
             </div>
         </div>
 
         <!-- FAQ -->
-        <div class="section" id="faq">
-            <h2 class="section-title">Часто задаваемые вопросы</h2>
-            <p class="section-subtitle">Ответы на популярные вопросы</p>
+        <div class="section" id="faq"><h2 class="section-title" data-key="faq_title">❓ Часто задаваемые вопросы</h2><p class="section-subtitle" data-key="faq_sub">Ответы на популярные вопросы</p>
             <div class="faq-grid">
-                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Как зарегистрироваться в системе?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Регистрация новых пользователей производится только администратором системы. Обратитесь к вашему классному руководителю или администрации школы.</div></div>
-                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Что делать, если забыл пароль?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Обратитесь к учителю или администратору — они смогут сбросить ваш пароль и выдать новый.</div></div>
-                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Как учителю выставить оценки?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Войдите в панель учителя, перейдите в раздел "Журнал оценок", выберите класс и предмет, затем введите оценку для каждого ученика.</div></div>
-                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Как ученику посмотреть домашнее задание?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">После входа в ученический аккаунт перейдите в раздел "Домашка" в боковом меню. Там будут все актуальные задания.</div></div>
-                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span>❓ Можно ли изменить аватар?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да! В разделе "Настройки" вы можете загрузить свою фотографию, которая будет отображаться в профиле.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span data-key="faq1_q">❓ Как зарегистрироваться в системе?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer" data-key="faq1_a">Регистрация новых пользователей производится только администратором системы. Обратитесь к вашему классному руководителю или администрации школы.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span data-key="faq2_q">❓ Что делать, если забыл пароль?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer" data-key="faq2_a">Обратитесь к учителю или администратору — они смогут сбросить ваш пароль и выдать новый.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span data-key="faq3_q">❓ Как учителю выставить оценки?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer" data-key="faq3_a">Войдите в панель учителя, перейдите в раздел "Журнал оценок", выберите класс и предмет.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span data-key="faq4_q">❓ Как ученику посмотреть домашнее задание?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer" data-key="faq4_a">После входа в ученический аккаунт перейдите в раздел "Домашка" в боковом меню.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span data-key="faq5_q">❓ Можно ли изменить аватар?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer" data-key="faq5_a">Да! В разделе "Настройки" вы можете загрузить свою фотографию.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-question"><span data-key="faq6_q">❓ Как записаться в кружок?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer" data-key="faq6_a">Нажмите на карточку кружка, чтобы увидеть подробную информацию и контакты преподавателя.</div></div>
             </div>
         </div>
 
-        <!-- Контакты -->
-        <div class="contact-section" id="contact">
-            <h2 style="color: white; margin-bottom: 15px;">📞 Свяжитесь с нами</h2>
-            <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">Есть вопросы? Мы всегда готовы помочь!</p>
+        <!-- РАСПИСАНИЕ -->
+        <div class="stats-section"><h2 class="section-title" style="font-size: 32px;" data-key="schedule_title">⏰ Расписание и режим работы</h2>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showToast('Учебные занятия: Пн-Пт 8:30-14:30')"><i class="fas fa-clock"></i><h3>Учебные занятия</h3><p>Пн-Пт: 8:30 – 14:30</p><p>Сб: 9:00 – 12:00</p></div>
+                <div class="feature-card" onclick="showToast('Кружки: 15:00-17:00')"><i class="fas fa-chalkboard"></i><h3>Кружки</h3><p>15:00 – 17:00 (будни)</p></div>
+                <div class="feature-card" onclick="showToast('Библиотека: Пн-Пт 9:00-17:00')"><i class="fas fa-book-open"></i><h3>Библиотека</h3><p>Пн-Пт: 9:00 – 17:00</p></div>
+            </div>
+        </div>
+
+        <!-- КОНТАКТЫ -->
+        <div class="contact-section" id="contact"><h2 style="color: white; margin-bottom: 15px;" data-key="contact_title">📞 Свяжитесь с нами</h2><p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;" data-key="contact_desc">Есть вопросы? Мы всегда готовы помочь!</p>
             <div class="contact-buttons">
-                <a href="mailto:support@iggroup.com" class="contact-btn"><i class="fas fa-envelope"></i> support@iggroup.com</a>
+                <a href="mailto:info@igmaktab.com" class="contact-btn"><i class="fas fa-envelope"></i> info@igmaktab.com</a>
                 <a href="tel:+992123456789" class="contact-btn"><i class="fas fa-phone"></i> +992 (12) 345-67-89</a>
-                <a href="#" class="contact-btn"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#" class="contact-btn" onclick="showToast('Наш Telegram: @igmaktab')"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#" class="contact-btn" onclick="showToast('Наш Instagram: @igmaktab')"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#" class="contact-btn" onclick="showToast('Наш YouTube: IG MAKTAB')"><i class="fab fa-youtube"></i> YouTube</a>
             </div>
+            <div style="margin-top: 30px;"><p><i class="fas fa-map-marker-alt"></i> г. Душанбе, ул. Рудаки, 15</p><p><i class="fas fa-clock"></i> Пн-Пт: 08:00 - 18:00, Сб: 09:00 - 14:00</p></div>
         </div>
 
-        <div class="footer">
-            <p>© 2026 IG Group. Все права защищены. Современная образовательная платформа.</p>
-            <p style="margin-top: 8px; font-size: 12px;">Разработано с ❤️ для цифрового образования</p>
+        <div class="footer"><p>© 2026 IG MAKTAB. <span data-key="footer_text">Все права защищены. Современная образовательная платформа.</span></p>
+            <div class="social-links"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-telegram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
         </div>
     </div>
+
+    <div id="globalModal" class="modal"><div class="modal-content"><h3 id="modalTitle">Информация</h3><div id="modalBody"></div><button class="close-modal" onclick="closeModal()">Закрыть</button></div></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -823,16 +351,140 @@
             messagingSenderId: "424982334748",
             appId: "1:424982334748:web:8e7c21d834328994df3ed9"
         };
-
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Онлайн-счётчик
-        onValue(ref(db, 'stats/online'), (snap) => {
-            document.getElementById('online-count').innerText = snap.val() || 0;
+        // МУЛЬТИЯЗЫЧНОСТЬ
+        let currentLang = localStorage.getItem('lang') || 'ru';
+        const translations = {
+            ru: {
+                nav_home: "Главная", nav_about: "О нас", nav_library: "Библиотека", nav_circles: "Кружки", nav_olympiads: "Олимпиады", nav_news: "Новости", nav_teachers: "Учителя", nav_gallery: "Галерея", nav_faq: "FAQ", nav_contact: "Контакты",
+                online_now: "Сейчас онлайн", users: "пользователей", hero_title: "IG MAKTAB<br>Образование нового поколения", hero_desc: "Современная образовательная платформа, объединяющая учеников, учителей и родителей.",
+                stat_students: "Учеников", stat_teachers: "Учителей", stat_marks: "Оценок", stat_homeworks: "ДЗ", stat_books: "Книг", stat_circles: "Кружков",
+                login_title: "Вход в кабинет", login_sub: "Введите логин и пароль", login_label: "Логин / ID", pass_label: "Пароль", login_btn: "Войти →", demo_title: "📚 Демо-доступ:", student_label: "Ученик:", teacher_label: "Учитель:", admin_label: "Администратор:",
+                about_title: "🌟 О платформе IG MAKTAB", about_sub: "Мы создаём будущее образования уже сегодня",
+                tech_title: "Современные технологии", tech_desc: "Используем Firebase для мгновенной синхронизации данных.",
+                security_title: "Безопасность данных", security_desc: "Все данные защищены и хранятся в надёжном облачном хранилище.",
+                analytics_title: "Аналитика успеваемости", analytics_desc: "Подробная статистика и графики для каждого ученика.",
+                features_title: "Что вы можете делать?", features_sub: "Все инструменты для эффективного обучения",
+                slider_title: "🏆 Наши достижения", slider_sub: "Гордость нашей школы",
+                library_title: "📚 Библиотека знаний", library_sub: "Доступ к тысячам учебников и материалов",
+                circles_title: "🎯 Кружки и секции", circles_sub: "Развивай свои таланты",
+                olympiad_title: "🏆 Олимпиады и конкурсы", olympiad_sub: "Достижения и планы",
+                olympians_title: "🥇 Наши олимпийцы", olympians_sub: "Золотые медалисты и призёры",
+                news_title: "📰 Последние новости", news_sub: "Будьте в курсе событий",
+                teachers_title: "👨‍🏫 Наши лучшие учителя", teachers_sub: "Профессионалы своего дела",
+                reviews_title: "Что говорят о нас", reviews_sub: "Реальные отзывы наших пользователей",
+                gallery_title: "📸 Фотогалерея", gallery_sub: "Лучшие моменты школьной жизни",
+                faq_title: "❓ Часто задаваемые вопросы", faq_sub: "Ответы на популярные вопросы",
+                faq1_q: "❓ Как зарегистрироваться в системе?", faq1_a: "Регистрация новых пользователей производится только администратором системы.",
+                faq2_q: "❓ Что делать, если забыл пароль?", faq2_a: "Обратитесь к учителю или администратору.",
+                faq3_q: "❓ Как учителю выставить оценки?", faq3_a: "Войдите в панель учителя, перейдите в раздел 'Журнал оценок'.",
+                faq4_q: "❓ Как ученику посмотреть домашнее задание?", faq4_a: "После входа в ученический аккаунт перейдите в раздел 'Домашка'.",
+                faq5_q: "❓ Можно ли изменить аватар?", faq5_a: "Да! В разделе 'Настройки' вы можете загрузить свою фотографию.",
+                faq6_q: "❓ Как записаться в кружок?", faq6_a: "Нажмите на карточку кружка, чтобы увидеть подробную информацию.",
+                schedule_title: "⏰ Расписание и режим работы", contact_title: "📞 Свяжитесь с нами", contact_desc: "Есть вопросы? Мы всегда готовы помочь!",
+                footer_text: "Все права защищены. Современная образовательная платформа."
+            },
+            tj: {
+                nav_home: "Асосӣ", nav_about: "Дар бораи мо", nav_library: "Китобхона", nav_circles: "Давраҳо", nav_olympiads: "Олимпиадаҳо", nav_news: "Навигариҳо", nav_teachers: "Муаллимон", nav_gallery: "Галерея", nav_faq: "Саволҳо", nav_contact: "Тамос",
+                online_now: "Ҳоло онлайн", users: "корбарон", hero_title: "IG MAKTAB<br>Маорифи асри нав", hero_desc: "Платформаи муосири таълимӣ барои хонандагон, омӯзгорон ва волидон.",
+                stat_students: "Хонандагон", stat_teachers: "Омӯзгорон", stat_marks: "Баҳоҳо", stat_homeworks: "Вазифаҳо", stat_books: "Китобҳо", stat_circles: "Давраҳо",
+                login_title: "Вуруд ба система", login_sub: "Логин ва рамзро ворид кунед", login_label: "Логин / ID", pass_label: "Рамз", login_btn: "Вуруд →", demo_title: "📚 Дастрасии демо:", student_label: "Хонанда:", teacher_label: "Муаллим:", admin_label: "Администратор:",
+                about_title: "🌟 Дар бораи платформаи IG MAKTAB", about_sub: "Мо ояндаи маорифро имрӯз месозем",
+                tech_title: "Технологияҳои муосир", tech_desc: "Истифодаи Firebase барои ҳамгироии фаврӣ.",
+                security_title: "Амнияти маълумот", security_desc: "Ҳама маълумот муҳофизат шудааст.",
+                analytics_title: "Тахлили пешрафт", analytics_desc: "Омори муфассал барои ҳар хонанда.",
+                features_title: "Шумо чӣ кор карда метавонед?", features_sub: "Ҳама абзорҳо барои таълими самаранок",
+                slider_title: "🏆 Дастовардҳои мо", slider_sub: "Ифтихори мактаби мо",
+                library_title: "📚 Китобхонаи дониш", library_sub: "Дастрасӣ ба ҳазорҳо китобҳо",
+                circles_title: "🎯 Давраҳо ва сексияҳо", circles_sub: "Истеъдодҳои худро инкишоф диҳед",
+                olympiad_title: "🏆 Олимпиадаҳо ва озмунҳо", olympiad_sub: "Дастовардҳо ва нақшаҳо",
+                olympians_title: "🥇 Олимпиячиёни мо", olympians_sub: "Медалиёни тилло ва ҷоизадорон",
+                news_title: "📰 Навигариҳои охирин", news_sub: "Аз рӯйдодҳо огоҳ бошед",
+                teachers_title: "👨‍🏫 Беҳтарин муаллимони мо", teachers_sub: "Мутахассисони соҳаи худ",
+                reviews_title: "Дар бораи мо чӣ мегӯянд", reviews_sub: "Тақризҳои воқеии корбарони мо",
+                gallery_title: "📸 Галереяи аксҳо", gallery_sub: "Лаҳзаҳои беҳтарини ҳаёти мактаб",
+                faq_title: "❓ Саволҳои зиёд такроршаванда", faq_sub: "Ҷавобҳо ба саволҳои маъмул",
+                faq1_q: "❓ Чӣ тавр дар система бақайд гирифтан мумкин?", faq1_a: "Бақайдгирии корбарони нав танҳо аз ҷониби администратор.",
+                faq2_q: "❓ Агар рамзро фаромӯш кардам, чӣ бояд кард?", faq2_a: "Ба муаллим ё администратор муроҷиат кунед.",
+                faq3_q: "❓ Чӣ тавр муаллим баҳо гузошта метавонад?", faq3_a: "Ба панели муаллим ворид шавед, ба қисми 'Ҷурнали баҳоҳо' гузаред.",
+                faq4_q: "❓ Чӣ тавр хонанда вазифаи хонагиро дида метавонад?", faq4_a: "Пас аз вуруд ба ҳисоби хонанда, ба қисми 'Вазифаҳо' гузаред.",
+                faq5_q: "❓ Оё метавонам аватарро иваз кунам?", faq5_a: "Ҳа! Дар қисми 'Танзимот' шумо метавонед акси худро боргузорӣ кунед.",
+                faq6_q: "❓ Чӣ тавр ба давра ҳуҷҷат диҳед?", faq6_a: "Ба корти давра клик кунед, то маълумоти муфассалро бубинед.",
+                schedule_title: "⏰ Ҷадвал ва тартиби кор", contact_title: "📞 Бо мо тамос гиред", contact_desc: "Савол доред? Мо ҳамеша омодаем, ки кӯмак кунем!",
+                footer_text: "Ҳама ҳуқуқ ҳифз шудааст. Платформаи муосири таълимӣ."
+            },
+            en: {
+                nav_home: "Home", nav_about: "About", nav_library: "Library", nav_circles: "Clubs", nav_olympiads: "Olympiads", nav_news: "News", nav_teachers: "Teachers", nav_gallery: "Gallery", nav_faq: "FAQ", nav_contact: "Contact",
+                online_now: "Online now", users: "users", hero_title: "IG MAKTAB<br>Education of the new generation", hero_desc: "Modern educational platform for students, teachers and parents.",
+                stat_students: "Students", stat_teachers: "Teachers", stat_marks: "Grades", stat_homeworks: "Homework", stat_books: "Books", stat_circles: "Clubs",
+                login_title: "Login", login_sub: "Enter login and password", login_label: "Login / ID", pass_label: "Password", login_btn: "Login →", demo_title: "📚 Demo access:", student_label: "Student:", teacher_label: "Teacher:", admin_label: "Administrator:",
+                about_title: "🌟 About IG MAKTAB platform", about_sub: "We create the future of education today",
+                tech_title: "Modern technologies", tech_desc: "Using Firebase for instant synchronization.",
+                security_title: "Data security", security_desc: "All data is protected and stored securely.",
+                analytics_title: "Performance analytics", analytics_desc: "Detailed statistics for each student.",
+                features_title: "What can you do?", features_sub: "All tools for effective learning",
+                slider_title: "🏆 Our achievements", slider_sub: "Pride of our school",
+                library_title: "📚 Knowledge library", library_sub: "Access to thousands of books",
+                circles_title: "🎯 Clubs and sections", circles_sub: "Develop your talents",
+                olympiad_title: "🏆 Olympiads and competitions", olympiad_sub: "Achievements and plans",
+                olympians_title: "🥇 Our olympians", olympians_sub: "Gold medalists and prize winners",
+                news_title: "📰 Latest news", news_sub: "Stay updated with events",
+                teachers_title: "👨‍🏫 Our best teachers", teachers_sub: "Professionals in their field",
+                reviews_title: "What they say about us", reviews_sub: "Real reviews from our users",
+                gallery_title: "📸 Photo gallery", gallery_sub: "Best moments of school life",
+                faq_title: "❓ Frequently asked questions", faq_sub: "Answers to popular questions",
+                faq1_q: "❓ How to register in the system?", faq1_a: "Registration of new users is done only by the system administrator.",
+                faq2_q: "❓ What if I forgot my password?", faq2_a: "Contact your teacher or administrator.",
+                faq3_q: "❓ How can a teacher grade?", faq3_a: "Login to the teacher panel, go to the 'Gradebook' section.",
+                faq4_q: "❓ How can a student view homework?", faq4_a: "After logging into the student account, go to the 'Homework' section.",
+                faq5_q: "❓ Can I change my avatar?", faq5_a: "Yes! In the 'Settings' section you can upload your photo.",
+                faq6_q: "❓ How to enroll in a club?", faq6_a: "Click on the club card to see detailed information.",
+                schedule_title: "⏰ Schedule and working hours", contact_title: "📞 Contact us", contact_desc: "Have questions? We are always ready to help!",
+                footer_text: "All rights reserved. Modern educational platform."
+            }
+        };
+        function applyLanguage() {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key];
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === currentLang) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.getAttribute('data-lang');
+                localStorage.setItem('lang', currentLang);
+                applyLanguage();
+            });
         });
+        applyLanguage();
 
-        // Загрузка статистики
+        // СЛАЙДЕР
+        let currentSlide = 0;
+        let slides = document.querySelectorAll('.slider-slide');
+        let dotsContainer = document.getElementById('dots');
+        function updateSlider() {
+            let track = document.getElementById('sliderTrack');
+            if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentSlide); });
+        }
+        window.prevSlide = () => { if (currentSlide > 0) { currentSlide--; updateSlider(); } };
+        window.nextSlide = () => { if (currentSlide < slides.length - 1) { currentSlide++; updateSlider(); } };
+        if (dotsContainer && slides.length) {
+            for (let i = 0; i < slides.length; i++) {
+                let dot = document.createElement('div'); dot.classList.add('dot'); if (i === 0) dot.classList.add('active');
+                dot.onclick = () => { currentSlide = i; updateSlider(); };
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // FIREBASE СТАТИСТИКА
+        onValue(ref(db, 'stats/online'), (snap) => { document.getElementById('online-count').innerText = snap.val() || 0; });
         const loadStats = async () => {
             const usersSnap = await get(ref(db, 'users'));
             const users = usersSnap.val() || {};
@@ -848,7 +500,6 @@
             document.getElementById('stat-students').innerText = students;
             document.getElementById('stat-teachers').innerText = teachers;
             document.getElementById('stat-marks').innerText = totalMarks;
-            
             const hwSnap = await get(ref(db, 'homeworks'));
             const hw = hwSnap.val() || {};
             let totalHw = 0;
@@ -857,47 +508,44 @@
         };
         loadStats();
 
-        // Функция входа
+        // ЛОГИН
         window.login = async () => {
             const login = document.getElementById('login-input').value.trim();
             const password = document.getElementById('password-input').value.trim();
-            if (!login || !password) { alert("Введите логин и пароль!"); return; }
-            
+            if (!login || !password) { showToast("Введите логин и пароль!"); return; }
             let userRef = ref(db, 'users/' + login);
             let snapshot = await get(userRef);
             if (!snapshot.exists()) { userRef = ref(db, 'admins/' + login); snapshot = await get(userRef); }
-            
             if (snapshot.exists()) {
                 const user = snapshot.val();
-                if (user.pass === password) {
+                if (user.pass == password) {
                     localStorage.setItem('currentUser', JSON.stringify({ id: login, name: user.name, role: user.role, login: login, group: user.group || '' }));
                     const onlineRef = ref(db, 'stats/online');
                     const currentOnline = (await get(onlineRef)).val() || 0;
                     await set(onlineRef, currentOnline + 1);
-                    if (user.role === 'master') window.location.href = 'master.html';
-                    else if (user.role === 'teacher') window.location.href = 'admin.html';
-                    else window.location.href = 'index.html';
-                } else { alert("Неверный пароль!"); }
-            } else { alert("Пользователь не найден!"); }
+                    if (user.role === 'master') location.href = 'master.html';
+                    else if (user.role === 'teacher') location.href = 'admin.html';
+                    else location.href = 'index.html';
+                } else { showToast("Неверный пароль!"); }
+            } else { showToast("Пользователь не найден!"); }
         };
-        
-        // Мобильное меню
-        window.toggleMenu = () => {
-            document.getElementById('navLinks').classList.toggle('show');
-        };
-        window.closeMenu = () => {
-            document.getElementById('navLinks').classList.remove('show');
-        };
-        
-        window.scrollToSection = (id) => {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        };
+
+        // МОДАЛЬНЫЕ ОКНА
+        const modal = document.getElementById('globalModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        window.showModal = (title, content) => { modalTitle.innerText = title; modalBody.innerHTML = content; modal.classList.add('active'); };
+        window.closeModal = () => { modal.classList.remove('active'); };
+        window.showToast = (msg) => { let t = document.createElement('div'); t.className = 'toast'; t.innerHTML = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2000); };
+        window.openLibrary = (cat) => { showModal(`📚 ${cat}`, `<p>В библиотеке ${cat} есть: учебники, задачники, видеоуроки, тесты. Полный доступ после авторизации.</p><p>Количество материалов: 100+</p>`); };
+        window.showCircleInfo = (name, info) => { showModal(`🎯 ${name}`, `<p><strong>Расписание:</strong> ${info}</p><p><strong>Запись:</strong> обратитесь к преподавателю или в учебную часть.</p><p>📞 +992 (12) 345-67-89</p>`); };
+        window.showOlympiadInfo = (title, desc) => { showModal(`🏆 ${title}`, `<p>${desc}</p><p>Подробности у классного руководителя.</p>`); };
+        window.showNews = (title, desc) => { showModal(`📰 ${title}`, `<p>${desc}</p><p>Подробности на стенде и в Telegram-канале.</p>`); };
+        window.toggleMenu = () => { document.getElementById('navLinks').classList.toggle('show'); };
+        window.closeMenu = () => { document.getElementById('navLinks').classList.remove('show'); };
+        window.scrollToSection = (id) => { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); };
         window.toggleFaq = (element) => { element.classList.toggle('active'); };
-        
         document.getElementById('password-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
     </script>
-    <div style="display: none;">
-    IG MAKTAB | IG MAKTAB школа | IG MAKTAB образование | IG MAKTAB платформа
-</div>
 </body>
 </html>
